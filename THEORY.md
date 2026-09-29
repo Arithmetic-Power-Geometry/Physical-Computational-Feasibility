@@ -1219,62 +1219,52 @@ This is the threshold for moving from a strong framework/no-go study to a substa
 
 ---
 
-## 25. Stronger conventional-complexity controls
+## 25. Corrected conventional-complexity controls
 
-The F126/F395 witness was tested against additional exact Boolean-function measures.
+A subsequent exhaustive audit identified an error in the earlier reported conventional profiles for F126/F395. The incorrect Proposition 10 is withdrawn.
 
-For both functions:
+The corrected exact values are:
 
-[
-bs(f)=4,
-qquad
-deg_{mathrm{ANF}}(f)=4,
-qquad
-D(f)=4,
-qquad
-C(f)=4.
-]
+\[
+F126:\quad bs=3,\;\deg_{\mathrm{ANF}}=3,\;D=4,\;C=3,\;\{C_0,C_1\}=\{3,3\},
+\]
 
-Here (bs) is block sensitivity, (deg_{mathrm{ANF}}) is exact algebraic degree over the Boolean algebraic normal form, (D) is deterministic decision-tree depth, and (C) is worst-case certificate complexity.
+\[
+F395:\quad bs=3,\;\deg_{\mathrm{ANF}}=4,\;D=4,\;C=3,\;\{C_0,C_1\}=\{2,3\}.
+\]
 
-The one-sided certificate profiles are exchanged:
+Thus F126/F395 remains a valid scalar+spectral sensitivity-geometry separation, but it is **not** matched on algebraic degree or the one-sided certificate profile.
 
-[
-F126:quad(C,C_0,C_1)=(4,3,4),
-]
+### Exhaustive strengthened-summary audit at n=4
 
-[
-F395:quad(C,C_0,C_1)=(4,4,3).
-]
+All 65,536 four-variable Boolean functions were grouped by
 
-Output complementation exchanges (C_0) and (C_1), so the unordered one-sided certificate profile is the same:
-
-[
-{C_0,C_1}={3,4}.
-]
-
-Thus the pair agrees on the following controlled summary:
-
-[
+\[
 S^*(f)=
-(
-\operatorname{ess},
-|E|,
-s,
-H_{\deg},
-\rho,
-bs,
-\deg_{\mathrm{ANF}},
-D,
-C,
-\{C_0,C_1\}
-).
-]
+(\operatorname{ess},|E|,s,H_{\deg},\rho,bs,\deg_{\mathrm{ANF}},D,C,\{C_0,C_1\}).
+\]
 
-Nevertheless their residual sensitivity-graph component sizes, matching numbers, and diameter profiles remain different.
+The enumeration produced 220 distinct (S^*)-classes. For the residual geometry tuple
 
-### Proposition 10 — strengthened matched witness
+\[
+G^*(f)=(\text{active component sizes},\nu,\text{active diameter profile}),
+\]
 
-F126 and F395 are indistinguishable by (S^*) above, up to the natural output-label symmetry in one-sided certificate complexity, but are distinguishable by residual sensitivity-graph geometry.
+no (S^*)-class contained more than one (G^*)-value.
 
-This does not yet establish a physical-resource separation. It substantially strengthens the control witness that any proposed operational model must explain.
+Therefore:
+
+\[
+\boxed{
+S^*(f)=S^*(g)\Longrightarrow G^*(f)=G^*(g)
+\quad\text{for all four-variable Boolean functions.}
+}
+\]
+
+This is a finite exhaustive fact for (n=4), not a theorem for arbitrary (n).
+
+### Consequence
+
+The strengthened matched-witness search must move beyond (n=4). Exhaustive enumeration of all five-variable Boolean functions would require (2^{32}) truth tables, so the next phase uses targeted/symmetry-aware search rather than full enumeration.
+
+Scientific correction is part of the reproducibility record; the withdrawn claim must not be used in later novelty statements.
