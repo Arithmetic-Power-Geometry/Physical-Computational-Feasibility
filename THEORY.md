@@ -800,3 +800,71 @@ The research question is narrower:
 > Do non-spectral geometric properties of (G_f), when combined with an explicit physical locality/noise model, predict physical resource requirements not captured by sensitivity, block sensitivity, spectral sensitivity, or standard query/circuit measures?
 
 This is now an experimentally falsifiable question and provides the transition point from pure theory to exhaustive software search.
+
+
+---
+
+## 18. Stronger finite separation with matched spectral sensitivity
+
+Exhaustive enumeration of all 65,536 four-variable Boolean functions yields a stronger controlled pair: F126 and F395.
+
+Their one-sets are
+
+[
+F126^{-1}(1)=\{0001,0010,0011,0100,0101,0110\},
+]
+
+[
+F395^{-1}(1)=\{0000,0001,0011,0111,1000\}.
+]
+
+They have identical:
+
+- essential-variable count: 4;
+- undirected sensitive-edge count: 12;
+- maximum sensitivity: 3;
+- complete sensitivity-degree histogram:
+  [
+  0^2,1^6,2^6,3^2;
+  ]
+- adjacency spectral radius:
+  [
+  \boxed{\rho(G_f)=2}.
+  ]
+
+Nevertheless,
+
+[
+F126:\quad
+\text{active components}=(7,7),\;
+\nu=6,\;
+\text{diameters}=(4,4),
+]
+
+while
+
+[
+F395:\quad
+\text{active components}=(9,5),\;
+\nu=5,\;
+\text{diameters}=(6,4).
+]
+
+Here (
+u) is the maximum-matching number.
+
+### Proposition 5 — spectral-matched residual-geometry separation
+
+Essential-variable count, sensitive-edge count, maximum sensitivity, the full sensitivity-degree histogram, and sensitivity-graph spectral radius do not jointly determine sensitivity-graph component sizes, maximum-matching number, or diameter profile.
+
+### Proof
+
+F126 and F395 agree on every quantity in the premise and differ on every listed residual-geometric quantity. \(\square\)
+
+The exhaustive (n=4) search finds four matched scalar+spectral classes with differing residual geometry, so the phenomenon is not unique to this witness.
+
+### Research significance
+
+This proposition is a graph-theoretic separation, not yet a physical-computation lower bound. Its role is to remove spectral radius as a sufficient explanation for all remaining sensitivity-graph geometry.
+
+The next experiment must test whether two such spectrally matched functions have different resource requirements under the **same explicitly defined physical locality/noise model**. Only such a result could elevate residual geometry from descriptive structure to a physical-computation predictor.
