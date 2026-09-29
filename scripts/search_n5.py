@@ -44,7 +44,7 @@ def refinement_keys(n,mask,digits=9):
     k1=(round(g.spectral_radius,digits),)
     p=conventional_profile(n,mask)
     C,C0,C1=p["certificate_complexity"]
-    k2=k1+(p["algebraic_degree"],)
+    k2=k1+(p["algebraic_degree"],p["real_polynomial_degree"],)
     k3=k2+(p["block_sensitivity"],)
     k4=k3+(p["decision_tree_depth"],C,tuple(sorted((C0,C1))),)
     return k1,k2,k3,k4
