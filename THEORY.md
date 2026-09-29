@@ -942,3 +942,54 @@ To test whether residual sensitivity-graph geometry has physical meaning, the ne
 - trajectory-dependent physical states.
 
 This negative result narrows the model class required for the next experiment.
+
+
+---
+
+## 20. Shared-capacity falsification
+
+A natural attempt to make sensitivity-graph geometry operational is to impose shared protection capacity: in one round, a physical state may participate in at most one protected sensitive transition.
+
+This scheduling problem is exactly edge coloring of the sensitivity graph (G_f).
+
+Every sensitivity graph is a subgraph of the Boolean hypercube. The hypercube is bipartite, and every subgraph of a bipartite graph is bipartite. Therefore, by König's line-coloring theorem,
+
+[
+\boxed{
+\chi'(G_f)=\Delta(G_f)=s(f)
+}.
+]
+
+Thus the minimum number of endpoint-conflict-free protection rounds is already determined by maximum sensitivity.
+
+For the matched pair F126/F395,
+
+[
+s(F126)=s(F395)=3,
+]
+
+so both require exactly
+
+[
+\boxed{3}
+]
+
+such rounds.
+
+Although their maximum matching numbers differ,
+
+[
+\nu(F126)=6,qquad \nu(F395)=5,
+]
+
+that difference does not induce different edge-coloring round complexity.
+
+### Proposition 7 — endpoint-capacity collapse
+
+For any Boolean function, a shared-capacity model whose only conflict rule is that two simultaneously serviced sensitive edges may not share a Boolean state has exact round complexity equal to maximum sensitivity.
+
+Consequently this model cannot provide a physical invariant beyond (s(f)).
+
+### Consequence
+
+Residual sensitivity-graph geometry can become operational only if the physical constraints depend on more than endpoint conflict. Examples that remain logically possible include metric embedding cost, finite spatial wire length, state-dependent trajectories, component setup/reset cost, or nonlocal congestion in a physical substrate. Each must be justified independently; none is assumed to be novel.
