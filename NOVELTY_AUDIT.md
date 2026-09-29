@@ -53,3 +53,22 @@ A result will be promoted from framework to breakthrough candidate only if all o
 7. GitHub Actions generates independent machine-readable artifacts.
 
 Until then, novelty language remains conservative.
+
+
+## Prior-art correction: regeneration
+
+A literature stress test shows that reliable computation with noisy gates already contains strong results connecting sensitivity/block sensitivity, redundancy, depth, and tolerable noise. Signal-propagation work also derives information-decay and noisy-depth limits. Recent 2026 work develops conditional contraction coefficients for channels with side information, including quantum networks.
+
+Accordingly:
+
+| Candidate | Revised estimate | Decision |
+|---|---:|---|
+| "Refresh must cost something" | 15/100 | too general |
+| Regeneration requires redundancy in noisy circuits | 10/100 | established territory |
+| Sensitivity + noisy-gate redundancy | 10/100 | established |
+| Conditional/side-information contraction as a general concept | 10/100 | active established literature |
+| Current feasibility-window synthesis | 45–55/100 | useful framework |
+| Task-specific feasibility boundary including explicit refresh resources | 60–70/100 potential | investigate |
+| New quantitative bound not reducible to noisy-circuit/SDPI results | 80/100 potential | breakthrough target |
+
+The repository therefore remains explicitly pre-breakthrough.
