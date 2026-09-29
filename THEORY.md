@@ -434,3 +434,204 @@ A candidate theorem is rejected or downgraded if it reduces directly to:
 - an instance-specific encoder that has already solved the problem.
 
 These rules are intentional: the purpose of the repository is to discover a genuinely nontrivial cross-resource law, not to rename known results.
+
+
+---
+
+## 12. Noise-contracted causal depth
+
+The previous sections separately constrain whether an essential input can reach the readout and whether a function-changing perturbation remains distinguishable. This section couples the two under an explicit contraction model.
+
+### Assumption: per-stage distinguishability contraction
+
+Consider an essential input perturbation (x\leftrightarrow x\oplus e_i). Suppose its relevant physical signal travels through a causal route of length (ell_i). Assume each noisy stage along that route is a channel whose total-variation contraction coefficient is at most
+
+[
+0\le \eta<1.
+]
+
+Thus, for any two distributions entering one such stage,
+
+[
+D_{\mathrm{TV}}(KP,KQ)
+\le
+\eta D_{\mathrm{TV}}(P,Q).
+]
+
+Repeated application gives
+
+[
+D_{\mathrm{TV}}^{\mathrm{out}}
+\le
+\eta^{\ell_i}
+D_{\mathrm{TV}}^{\mathrm{in}}
+\le
+\eta^{\ell_i}.
+]
+
+### Proposition 3 — essential-path contraction bound
+
+If the device computes (f) with worst-case error at most (epsilon<1/2), then every function-changing perturbation routed through (ell_i) contractive stages must satisfy
+
+[
+\boxed{
+\eta^{\ell_i}\ge1-2\epsilon
+}.
+]
+
+### Proof
+
+Proposition 2 requires output total-variation distance at least (1-2\epsilon) for every function-changing pair. Contractivity gives output distance at most (eta^{\ell_i}). Combining the inequalities yields the result. \(\square\)
+
+For (0<\eta<1), this gives a maximum admissible noisy path length
+
+[
+\boxed{
+\ell_i
+\le
+\frac{\ln(1-2\epsilon)}{\ln\eta}
+}.
+]
+
+The numerator and denominator are both negative.
+
+### Interpretation
+
+Dependency reach imposes a **minimum** amount of propagation or aggregation. Noise contraction imposes a **maximum** amount of propagation through unrefreshed contractive stages. A reliable architecture exists only if these requirements overlap.
+
+---
+
+## 13. Balanced-tree parity feasibility window
+
+Consider a balanced (q)-ary aggregation architecture with
+
+[
+e=m=1.
+]
+
+To make one readout depend on all (n) parity inputs, Proposition 1 requires
+
+[
+q^d\ge n,
+]
+
+so
+
+[
+d\ge \lceil\log_q n\rceil.
+]
+
+Under the homogeneous contraction assumption of Proposition 3, reliable computation also requires
+
+[
+d
+\le
+\frac{\ln(1-2\epsilon)}{\ln\eta}.
+]
+
+Therefore a necessary feasibility condition is
+
+[
+\boxed{
+\lceil\log_q n\rceil
+\le
+\frac{\ln(1-2\epsilon)}{\ln\eta}
+}.
+]
+
+Equivalently,
+
+[
+\boxed{
+\eta^{\lceil\log_q n\rceil}
+\ge
+1-2\epsilon
+}.
+]
+
+Ignoring the ceiling for a coarse continuous bound,
+
+[
+n
+\lesssim
+q^{
+\ln(1-2\epsilon)/\ln\eta
+}.
+]
+
+This is a **feasibility-window corollary**, not presently claimed as a new information-theoretic inequality. Its two ingredients are standard-style dependency growth and distinguishability contraction. Its role here is to make their resource conflict explicit for a problem-specific physical architecture.
+
+### Example
+
+Let
+
+[
+q=2,qquad \eta=0.9,qquad \epsilon=0.1.
+]
+
+Reliability requires output distinguishability at least
+
+[
+1-2\epsilon=0.8.
+]
+
+The contraction constraint permits at most
+
+[
+d
+\le
+\frac{\ln 0.8}{\ln 0.9}
+\approx2.12.
+]
+
+Thus an integer-depth architecture can use at most two unrefreshed contractive aggregation stages. Binary parity dependency requires
+
+[
+d\ge\lceil\log_2 n\rceil.
+]
+
+Consequently this simplified model can support at most
+
+[
+n\le4
+]
+
+inputs under these assumptions.
+
+This example is intentionally small: it demonstrates the collision of resource constraints, not a universal parity limit.
+
+---
+
+## 14. Limits of Proposition 3
+
+The contraction theorem does not apply unchanged when:
+
+- intermediate error correction or signal regeneration increases distinguishability using additional resources;
+- fresh ancillas, redundancy or external free energy are injected;
+- different stages have different contraction coefficients;
+- multiple causal routes combine;
+- the relevant metric is quantum trace distance rather than classical total variation;
+- the physical dynamics are not Markovian stagewise channels.
+
+These are not loopholes to ignore. They define the next resource coordinates that must be charged.
+
+For heterogeneous stages,
+
+[
+D_{\mathrm{TV}}^{\mathrm{out}}
+\le
+\left(\prod_{j=1}^{\ell_i}\eta_j\right)
+D_{\mathrm{TV}}^{\mathrm{in}},
+]
+
+giving the necessary condition
+
+[
+\boxed{
+\prod_{j=1}^{\ell_i}\eta_j
+\ge1-2\epsilon
+}.
+]
+
+The next theory target is to include **refresh/regeneration cost** explicitly and determine whether increasing distinguishability after contraction necessarily consumes a quantifiable resource such as redundancy, energy, fresh low-entropy ancillas, extra time, or additional physical volume.
+
