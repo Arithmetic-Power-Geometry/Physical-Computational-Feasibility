@@ -11,8 +11,9 @@ Status: **active**
 - [x] Define noise-aware essential-edge distinguishability.
 - [x] Define physical computational feasibility region.
 - [x] Add no-hidden-computation falsification rules.
-- [ ] Derive candidate sensitivity–noise–locality inequality.
-- [ ] Search for counterexamples.
+- [x] Derive first sensitivity/dependency–noise feasibility inequality.
+- [x] Stress-test first inequality against noisy-circuit and contraction literature.
+- [ ] Add explicit refresh/redundancy resource model and search for a bound not reducible to known noisy-circuit results.
 - [ ] Identify exact assumptions under which the inequality is tight.
 - [ ] Compare with known Boolean-function measures.
 - [ ] Freeze theory version 0.1 only after the candidate theorem survives.
