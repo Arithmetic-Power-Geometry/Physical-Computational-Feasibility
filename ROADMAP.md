@@ -89,3 +89,16 @@ The artifact is evidence produced by the software, not a manuscript.
 ## Phase VI — Paper
 
 Only after the theory, implementation and generated artifacts are stable should a manuscript be written externally from the verified findings.
+
+
+## Phase II-B — strengthened witness search
+
+- [x] Correct F126/F395 conventional profiles and withdraw the overstated n=4 claim.
+- [x] Exhaustively audit all 65,536 n=4 Boolean functions under strengthened summary S*.
+- [x] Establish that no n=4 S*-matched residual-geometry separation exists for the selected residual tuple.
+- [x] Implement deterministic targeted n=5 collision search with output-complement canonicalization.
+- [x] Add cheap-summary bucketing before expensive conventional/spectral controls.
+- [ ] Run larger multi-seed n=5 campaigns and persist candidate statistics.
+- [ ] Add input-permutation canonicalization or invariant prefiltering to reduce symmetry duplication.
+- [ ] If an n=5 witness is found, verify it independently and seek a lift/infinite family.
+- [ ] If no witness emerges at scale, formulate and test candidate determination theorems relating S* to residual geometry.
