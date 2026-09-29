@@ -1268,3 +1268,26 @@ This is a finite exhaustive fact for (n=4), not a theorem for arbitrary (n).
 The strengthened matched-witness search must move beyond (n=4). Exhaustive enumeration of all five-variable Boolean functions would require (2^{32}) truth tables, so the next phase uses targeted/symmetry-aware search rather than full enumeration.
 
 Scientific correction is part of the reproducibility record; the withdrawn claim must not be used in later novelty statements.
+
+
+## 26. Sparse truth-set cut identities
+
+Let \(S=f^{-1}(1)\subseteq Q_n\), and let \(G_f=\delta(S)\) be the sensitivity graph.  Write \(E_i(S)\) for internal edges of the induced subgraph \(Q_n[S]\) in coordinate direction \(i\), and \(E(S)=\sum_i E_i(S)\).
+
+Every vertex of \(Q_n\) has one incident edge in each coordinate direction. Counting incidences from vertices of \(S\) gives the exact identities
+
+\[
+w_i(f)=|S|-2|E_i(S)|,
+\]
+
+and therefore
+
+\[
+|E(G_f)|=n|S|-2|E(S)|.
+\]
+
+Thus, once the truth-set cardinality \(|S|=k\) is fixed, the directional sensitivity profile determines the multiset of directional internal-edge counts of \(Q_n[S]\), while total sensitivity determines the total number of internal edges.  These identities explain part of the rigidity seen in sparse-layer searches, but they do **not** by themselves determine the isomorphism type of \(Q_n[S]\), the cut-component structure, matching number, diameter profile, or the other strengthened complexity measures.
+
+### Exact finite checkpoint
+
+For \(n=5\) and \(|S|=4\), exhaustive enumeration of all \(\binom{32}{4}=35{,}960\) truth sets produced 625 classes after output-complement and input-variable permutation canonicalization and 31 cheap strengthened-summary buckets. No residual-geometry separation survived the full refinement controls. This is an exhaustive statement for this layer only; it is not a theorem for all five-variable Boolean functions.
