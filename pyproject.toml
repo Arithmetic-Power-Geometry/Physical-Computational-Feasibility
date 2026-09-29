@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "physical-computational-feasibility"
+version = "0.1.0"
+description = "Exact experiments for problem-specific physical computational feasibility"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [{name = "Mohammad Amir Khusru Akhtar"}]
+
+[tool.setuptools.packages.find]
+include = ["pcf*"]
