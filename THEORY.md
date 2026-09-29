@@ -868,3 +868,77 @@ The exhaustive (n=4) search finds four matched scalar+spectral classes with diff
 This proposition is a graph-theoretic separation, not yet a physical-computation lower bound. Its role is to remove spectral radius as a sufficient explanation for all remaining sensitivity-graph geometry.
 
 The next experiment must test whether two such spectrally matched functions have different resource requirements under the **same explicitly defined physical locality/noise model**. Only such a result could elevate residual geometry from descriptive structure to a physical-computation predictor.
+
+
+---
+
+## 19. First physical model and a negative result
+
+Consider (n) input coordinates placed on sites of a one-dimensional line. Input coordinate (i) is assigned site (pi(i)), and a single readout occupies site (r).
+
+For every sensitive edge ((x,i)inmathcal E_f), the perturbation caused by flipping coordinate (i) must propagate distance
+
+[
+d_i=|pi(i)-r|.
+]
+
+Under homogeneous contraction (eta), its surviving distinguishability is modeled as
+
+[
+Delta_i=\eta^{d_i}.
+]
+
+Reliable decoding requires
+
+[
+Delta_i\ge1-2\epsilon.
+]
+
+The implementation optimizes over all input permutations and readout sites.
+
+### Negative result
+
+For the spectrally matched witness pair F126/F395, this model does not expose the residual sensitivity-graph geometry.
+
+The reason is structural. Its objective has the form
+
+[
+C(f)=
+\sum_i w_i(f)c_i,
+]
+
+where
+
+[
+w_i(f)
+=
+|\{x:(x,i)\in\mathcal E_f\}|
+]
+
+is the number of sensitive edges in coordinate direction (i), while (c_i) depends only on the physical distance/noise assigned to coordinate (i).
+
+Such a coordinate-separable model discards adjacency relations among different sensitive edges.
+
+### Proposition 6 — coordinate-separable blindness
+
+Any physical cost functional depending on a Boolean function only through the directional sensitive-edge counts (w_i(f)),
+
+[
+C(f)=F(w_1(f),\ldots,w_n(f)),
+]
+
+cannot distinguish two functions having the same directional sensitivity-count vector, regardless of differences in sensitivity-graph component structure, matching number, or diameter.
+
+This follows immediately because all residual graph structure is absent from the arguments of (F).
+
+### Consequence
+
+To test whether residual sensitivity-graph geometry has physical meaning, the next model must be nonseparable across sensitivity edges. Candidate mechanisms include:
+
+- state-dependent routing;
+- shared finite-capacity transport channels;
+- congestion between simultaneously protected transitions;
+- common refresh resources;
+- trajectory-dependent physical states.
+
+This negative result narrows the model class required for the next experiment.
