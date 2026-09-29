@@ -1,1 +1,1 @@
-"""Research scripts for reproducible PCF experiments."""\n
+"""Research scripts for reproducible PCF experiments."""
