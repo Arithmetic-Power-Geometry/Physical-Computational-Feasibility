@@ -635,3 +635,68 @@ giving the necessary condition
 
 The next theory target is to include **refresh/regeneration cost** explicitly and determine whether increasing distinguishability after contraction necessarily consumes a quantifiable resource such as redundancy, energy, fresh low-entropy ancillas, extra time, or additional physical volume.
 
+
+
+---
+
+## 15. Regeneration and side-information accounting
+
+A passive channel acting only on the current carrier cannot increase total-variation distinguishability. Therefore any apparent regeneration step that raises task-relevant distinguishability must use resources not contained in that degraded carrier alone.
+
+Represent an active refresh stage as
+
+\[
+(S,Z)\xrightarrow{\mathcal R}S',
+\]
+
+where \(S\) is the degraded carrier and \(Z\) denotes additional physical resources such as redundant copies, correlated side information, fresh ancillas, external observations, or newly supplied task-relevant information.
+
+The key accounting rule is:
+
+> Distinguishability restoration is not free merely because it occurs inside a physical device; the source, preparation and reliability of \(Z\) must be included in the feasibility vector.
+
+This rule does not by itself provide a new lower bound. Reliable noisy computation already has deep theories of redundancy, noise thresholds and signal propagation. In particular, known results lower-bound reliable noisy-circuit size in terms of sensitivity and block sensitivity, including logarithmic redundancy for parity-like functions.
+
+### Consequence for this project
+
+The project will not claim that "regeneration requires redundancy" is new.
+
+Instead, refresh is represented explicitly by additional coordinates, for example
+
+\[
+\mathbf R_{\rm refresh}
+=
+(r, a, v, \tau, \xi, \ldots),
+\]
+
+where possible coordinates include redundancy width \(r\), fresh-ancilla count \(a\), physical volume \(v\), refresh time \(\tau\), and a model-specific reliability/resource coordinate \(\xi\).
+
+A candidate cross-resource result must outperform a simple restatement of known noisy-circuit redundancy or contraction results.
+
+---
+
+## 16. Refined research target
+
+After prior-art falsification, the target is now:
+
+\[
+\boxed{
+\text{task geometry}
++
+\text{dependency reach}
++
+\text{noise}
++
+\text{explicit refresh resources}
+\Longrightarrow
+\text{a model-specific feasibility boundary}
+}
+\]
+
+with three requirements:
+
+1. the dependency component cannot be reduced to ordinary output entropy;
+2. the noise/refresh component cannot be reduced to a standard contraction coefficient or known noisy-gate redundancy theorem;
+3. the resulting inequality must make a new quantitative prediction for at least one explicit physical architecture.
+
+This is the threshold that must be met before the project claims a new theorem beyond framework synthesis.
