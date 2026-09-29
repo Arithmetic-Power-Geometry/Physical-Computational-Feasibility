@@ -21,4 +21,14 @@ class GeometryWitnessTests(unittest.TestCase):
     def test_truth_sets(self):
         self.assertEqual(truth_set(4,111),("0000","0001","0010","0011","0101","0110"))
         self.assertEqual(truth_set(4,393),("0000","0011","0111","1000"))
+    def test_spectral_matched_witness_f126_f395(self):
+        a,b=analyze(4,126),analyze(4,395)
+        self.assertEqual(a.scalar_signature,b.scalar_signature)
+        self.assertTrue(math.isclose(a.spectral_radius,2.0,rel_tol=1e-8,abs_tol=1e-8))
+        self.assertTrue(math.isclose(b.spectral_radius,2.0,rel_tol=1e-8,abs_tol=1e-8))
+        self.assertEqual(a.active_component_sizes,(7,7))
+        self.assertEqual(b.active_component_sizes,(9,5))
+        self.assertEqual(a.matching_number,6); self.assertEqual(b.matching_number,5)
+        self.assertEqual(a.active_diameters,(4,4)); self.assertEqual(b.active_diameters,(6,4))
+
 if __name__=="__main__": unittest.main()
