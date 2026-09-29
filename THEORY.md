@@ -993,3 +993,55 @@ Consequently this model cannot provide a physical invariant beyond (s(f)).
 ### Consequence
 
 Residual sensitivity-graph geometry can become operational only if the physical constraints depend on more than endpoint conflict. Examples that remain logically possible include metric embedding cost, finite spatial wire length, state-dependent trajectories, component setup/reset cost, or nonlocal congestion in a physical substrate. Each must be justified independently; none is assumed to be novel.
+
+
+---
+
+## 21. Physical-layout audit
+
+A direct embedding hypothesis was tested next.
+
+### Fixed Boolean-hypercube embedding
+
+If Boolean states retain their natural hypercube coordinates and each sensitivity edge is realized by its native cube edge, every sensitive edge has unit length. Hence total wire length is simply
+
+[
+L_{\rm cube}(f)=|E_f|.
+]
+
+For F126 and F395,
+
+[
+L_{\rm cube}(F126)=L_{\rm cube}(F395)=12.
+]
+
+Thus the natural hypercube embedding cannot expose their residual geometry through total edge length.
+
+### Freely optimized one-dimensional embedding
+
+If active Boolean states may instead be placed freely on a line and the objective is
+
+[
+L_{\rm line}(G_f)
+=
+\min_{\pi}
+\sum_{(u,v)\in E_f}
+|\pi(u)-\pi(v)|,
+]
+
+the resulting problem is the classical Minimum Linear Arrangement problem.
+
+Therefore minimum wire length under unrestricted linear placement is not introduced here as a new complexity measure.
+
+### Proposition 8 — layout baseline
+
+Two immediate physical-layout constructions collapse to known quantities:
+
+1. fixed natural hypercube wire length equals sensitive-edge count;
+2. optimized one-dimensional total wire length is Minimum Linear Arrangement.
+
+Consequently neither construction, by itself, supplies the missing new physical-computational invariant.
+
+### Implication
+
+A publishable new invariant must couple computational transition geometry to a physical constraint not already exhausted by standard graph layout. Candidate constraints must be motivated by the computation itself, for example simultaneous requirements on layout, noisy distinguishability, refresh, and reusable architecture. Merely renaming graph-layout cost as physical complexity is excluded.
