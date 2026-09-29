@@ -102,3 +102,5 @@ Only after the theory, implementation and generated artifacts are stable should 
 - [ ] Add input-permutation canonicalization or invariant prefiltering to reduce symmetry duplication.
 - [ ] If an n=5 witness is found, verify it independently and seek a lift/infinite family.
 - [ ] If no witness emerges at scale, formulate and test candidate determination theorems relating S* to residual geometry.
+
+- [x] Add exact real multilinear polynomial degree as a strengthened search control.
