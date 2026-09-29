@@ -72,3 +72,18 @@ Accordingly:
 | New quantitative bound not reducible to noisy-circuit/SDPI results | 80/100 potential | breakthrough target |
 
 The repository therefore remains explicitly pre-breakthrough.
+
+
+## Finite geometry separation
+
+Exhaustive (n=4) enumeration found functions F111 and F393 with identical essential-variable count, total sensitivity, maximum sensitivity, and sensitivity-degree histogram, but different sensitivity-graph component structure, matching number, diameter profile, and spectral radius.
+
+This is a valid finite separation, but the sensitivity graph and spectral sensitivity are established objects in Boolean-function complexity. The result therefore supports a new experimental question rather than a breakthrough claim.
+
+| Item | Estimate | Status |
+|---|---:|---|
+| Explicit F111/F393 scalar-profile separation | 45/100 | new-to-project finite witness |
+| Sensitivity graph | 0/100 as project novelty | established |
+| Spectral sensitivity | 0/100 as project novelty | established |
+| Non-spectral sensitivity-graph geometry as physical predictor | 60–70/100 potential | test next |
+| A theorem linking such geometry to physical feasibility beyond known measures | 80+/100 potential | breakthrough target |
