@@ -28,12 +28,22 @@ def canonical_complement(n,mask):
     full=(1<<(1<<n))-1
     return min(mask,full^mask)
 
+def directional_sensitivity_counts(n,mask):
+    """Sensitive-edge counts by coordinate, sorted to remove variable labels."""
+    counts=[0]*n
+    for x in range(1<<n):
+        for i in range(n):
+            y=x^(1<<i)
+            if x<y and ((mask>>x)&1)!=((mask>>y)&1):
+                counts[i]+=1
+    return tuple(sorted(counts))
+
 def cheap_key(n,mask):
     g=analyze(n,mask)
     # Exclude spectral radius from first-stage hashing to avoid spending effort
     # interpreting numerical equality before a collision exists.
     return (g.essential_variables,len(g.sensitive_edges),g.max_sensitivity,
-            g.degree_histogram)
+            g.degree_histogram,directional_sensitivity_counts(n,mask))
 
 def residual_key(g):
     return (g.active_component_sizes,g.matching_number,g.active_diameters)
