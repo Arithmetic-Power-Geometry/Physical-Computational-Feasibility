@@ -96,7 +96,8 @@ def search(n=5,samples=10000,seed=20260929):
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--samples",type=int,default=10000)
-    ap.add_argument("--seed",type=int,default=20260929)\n    ap.add_argument("--multi-seed",type=int,default=1)
+    ap.add_argument("--seed",type=int,default=20260929)
+    ap.add_argument("--multi-seed",type=int,default=1)
     a=ap.parse_args(); r=search(samples=a.samples,seed=a.seed)
     print("unique",r["unique"])
     print("cheap_buckets",r["cheap_buckets"])
