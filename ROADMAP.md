@@ -104,3 +104,12 @@ Only after the theory, implementation and generated artifacts are stable should 
 - [ ] If no witness emerges at scale, formulate and test candidate determination theorems relating S* to residual geometry.
 
 - [x] Add exact real multilinear polynomial degree as a strengthened search control.
+
+## Verified n=5 campaign checkpoint
+
+- [x] Green CI campaign: four deterministic seeds (20260929--20260932), 5,000 requested samples each.
+- [x] 19,993 unique symmetry-canonical functions evaluated.
+- [x] 11,009 cheap-summary collision events observed.
+- [x] No residual-geometry separation survived the strengthened controls in this finite campaign.
+- [x] Treat this as finite search evidence only, not a proof of n=5 nonexistence.
+- [x] Add sorted directional sensitivity counts as a permutation-invariant strengthened control.
