@@ -38,13 +38,19 @@ def cheap_key(n,mask):
 def residual_key(g):
     return (g.active_component_sizes,g.matching_number,g.active_diameters)
 
-def strong_key(n,mask,digits=9):
-    g=analyze(n,mask); p=conventional_profile(n,mask)
+def refinement_keys(n,mask,digits=9):
+    """Return progressively more expensive exact/numerical controls."""
+    g=analyze(n,mask)
+    k1=(round(g.spectral_radius,digits),)
+    p=conventional_profile(n,mask)
     C,C0,C1=p["certificate_complexity"]
-    return (g.essential_variables,len(g.sensitive_edges),g.max_sensitivity,
-            g.degree_histogram,round(g.spectral_radius,digits),
-            p["block_sensitivity"],p["algebraic_degree"],
-            p["decision_tree_depth"],C,tuple(sorted((C0,C1))))
+    k2=k1+(p["algebraic_degree"],)
+    k3=k2+(p["block_sensitivity"],)
+    k4=k3+(p["decision_tree_depth"],C,tuple(sorted((C0,C1))),)
+    return k1,k2,k3,k4
+
+def strong_key(n,mask,digits=9):
+    return cheap_key(n,mask)+refinement_keys(n,mask,digits)[-1]
 
 def search(n=5,samples=10000,seed=20260929):
     rng=random.Random(seed); buckets=defaultdict(list); checked=set()
@@ -65,13 +71,25 @@ def search(n=5,samples=10000,seed=20260929):
         for m in masks:
             g=analyze(n,m); bygeom[residual_key(g)].append(m)
         if len(bygeom)<2: continue
-        strong=defaultdict(list)
-        for m in masks:
-            strong[strong_key(n,m)].append((m,residual_key(analyze(n,m))))
-        for sk,items in strong.items():
-            geoms={x[1] for x in items}
-            if len(geoms)>1:
-                candidates.append((sk,items))
+        # Progressive refinement: retain only sub-buckets that still contain
+        # at least two residual geometries after each additional control.
+        work=[masks]
+        for level in range(4):
+            nxt=[]
+            for group in work:
+                split=defaultdict(list)
+                for m in group:
+                    split[refinement_keys(n,m)[level]].append(m)
+                for subgroup in split.values():
+                    if len(subgroup)<2: continue
+                    geoms={residual_key(analyze(n,m)) for m in subgroup}
+                    if len(geoms)>1: nxt.append(subgroup)
+            work=nxt
+            if not work: break
+        for group in work:
+            sk=strong_key(n,group[0])
+            items=[(m,residual_key(analyze(n,m))) for m in group]
+            candidates.append((sk,items))
     return {"unique":len(checked),"cheap_buckets":len(buckets),
             "cheap_collisions":cheap_collisions,"strong_separations":candidates}
 
