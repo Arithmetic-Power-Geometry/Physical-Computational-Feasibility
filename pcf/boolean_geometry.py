@@ -107,12 +107,17 @@ def truth_set(n,mask):
 def enumerate_functions(n):
     for mask in range(1<<(1<<n)): yield analyze(n,mask)
 
-def find_geometry_separations(n):
+def find_geometry_separations(n, match_spectral=False, spectral_digits=10):
     groups={}
-    for g in enumerate_functions(n): groups.setdefault(g.scalar_signature,[]).append(g)
+    for g in enumerate_functions(n):
+        sig=g.scalar_signature
+        if match_spectral:
+            sig=sig+(round(g.spectral_radius,spectral_digits),)
+        groups.setdefault(sig,[]).append(g)
     for sig,members in groups.items():
         geometries={}
         for g in members:
-            key=(g.active_component_sizes,g.matching_number,g.active_diameters,round(g.spectral_radius,10))
+            key=(g.active_component_sizes,g.matching_number,g.active_diameters)
             geometries.setdefault(key,[]).append(g)
-        if len(geometries)>1: yield sig,geometries
+        if len(geometries)>1:
+            yield sig,geometries
