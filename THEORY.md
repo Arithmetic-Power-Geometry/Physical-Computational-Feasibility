@@ -700,3 +700,103 @@ with three requirements:
 3. the resulting inequality must make a new quantitative prediction for at least one explicit physical architecture.
 
 This is the threshold that must be met before the project claims a new theorem beyond framework synthesis.
+
+
+---
+
+## 17. Finite separation: scalar sensitivity does not determine sensitivity-edge geometry
+
+For a Boolean function (f), let (G_f) be the graph on ({0,1}^n) containing exactly the hypercube edges across which (f) changes value.
+
+An exhaustive enumeration at (n=4) produces a matched pair of Boolean functions with truth-table masks 111 and 393 (using lexicographic integer inputs (0,ldots,15), least-significant mask bit corresponding to input 0000).
+
+Both functions have:
+
+- 4 essential variables;
+- 12 undirected sensitive edges (directed total sensitivity 24);
+- maximum sensitivity 3;
+- identical sensitivity-degree histogram: two vertices of degree 0, eight of degree 1, two of degree 2, and four of degree 3.
+
+Yet their sensitivity graphs are not geometrically equivalent under these summaries.
+
+### Function F111
+
+One-set:
+
+[
+\{0000,0001,0010,0011,0101,0110\}.
+]
+
+Active sensitivity-graph component sizes:
+
+[
+\boxed{10,2,2}.
+]
+
+Maximum-matching size:
+
+[
+\boxed{6}.
+]
+
+Active-component diameters:
+
+[
+\boxed{6,1,1}.
+]
+
+Adjacency spectral radius:
+
+[
+\boxed{\sqrt 6\approx2.44949}.
+]
+
+### Function F393
+
+One-set:
+
+[
+\{0000,0011,0111,1000\}.
+]
+
+Active sensitivity-graph component sizes:
+
+[
+\boxed{6,4,4}.
+]
+
+Maximum-matching size:
+
+[
+\boxed{4}.
+]
+
+Active-component diameters:
+
+[
+\boxed{4,2,2}.
+]
+
+Adjacency spectral radius:
+
+[
+\boxed{\sqrt 5\approx2.23607}.
+]
+
+### Proposition 4 — geometry separation
+
+Essential-variable count, total sensitivity, maximum sensitivity, and the complete vertex sensitivity-degree histogram do not determine the connectivity, component-size distribution, matching number, diameter profile, or spectral radius of a Boolean function's sensitivity graph.
+
+### Proof
+
+The explicit pair F111/F393 has identical values for all four stated scalar/profile quantities but different values for each listed graph-geometric quantity. Therefore those summaries cannot determine the latter. \(\square\)
+
+### Novelty boundary
+
+The sensitivity graph itself is established in Boolean-function complexity, and its adjacency spectral norm is studied as spectral sensitivity. Proposition 4 therefore does **not** claim invention of the sensitivity graph or spectral sensitivity.
+
+The research question is narrower:
+
+> Do non-spectral geometric properties of (G_f), when combined with an explicit physical locality/noise model, predict physical resource requirements not captured by sensitivity, block sensitivity, spectral sensitivity, or standard query/circuit measures?
+
+This is now an experimentally falsifiable question and provides the transition point from pure theory to exhaustive software search.
