@@ -1,8 +1,28 @@
 """Targeted n=5 collision search for strengthened Boolean summaries."""
 import argparse, random, math
+from itertools import permutations
 from collections import defaultdict
 from pcf.boolean_geometry import analyze
 from pcf.measures import conventional_profile
+
+def _permute_mask(n,mask,p):
+    out=0
+    for x in range(1<<n):
+        y=0
+        for old in range(n):
+            if x&(1<<old): y|=1<<p[old]
+        if (mask>>x)&1: out|=1<<y
+    return out
+
+def canonical_symmetry(n,mask):
+    """Canonicalize input-variable permutations and output complement."""
+    full=(1<<(1<<n))-1
+    best=None
+    for p in permutations(range(n)):
+        m=_permute_mask(n,mask,p)
+        v=min(m,full^m)
+        if best is None or v<best: best=v
+    return best
 
 def canonical_complement(n,mask):
     full=(1<<(1<<n))-1
@@ -30,7 +50,7 @@ def search(n=5,samples=10000,seed=20260929):
     rng=random.Random(seed); buckets=defaultdict(list); checked=set()
     cheap_collisions=0
     for _ in range(samples):
-        mask=canonical_complement(n,rng.getrandbits(1<<n))
+        mask=canonical_symmetry(n,rng.getrandbits(1<<n))
         if mask in checked: continue
         checked.add(mask)
         ck=cheap_key(n,mask)
@@ -58,7 +78,7 @@ def search(n=5,samples=10000,seed=20260929):
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--samples",type=int,default=10000)
-    ap.add_argument("--seed",type=int,default=20260929)
+    ap.add_argument("--seed",type=int,default=20260929)\n    ap.add_argument("--multi-seed",type=int,default=1)
     a=ap.parse_args(); r=search(samples=a.samples,seed=a.seed)
     print("unique",r["unique"])
     print("cheap_buckets",r["cheap_buckets"])
