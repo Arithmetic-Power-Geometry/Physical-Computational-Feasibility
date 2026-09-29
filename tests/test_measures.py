@@ -10,6 +10,7 @@ class MeasureTests(unittest.TestCase):
         self.assertEqual(conventional_profile(4,126),{
             "block_sensitivity":3,
             "algebraic_degree":3,
+            "real_polynomial_degree":3,
             "certificate_complexity":(3,3,3),
             "decision_tree_depth":4,
         })
@@ -18,6 +19,7 @@ class MeasureTests(unittest.TestCase):
         self.assertEqual(conventional_profile(4,395),{
             "block_sensitivity":3,
             "algebraic_degree":4,
+            "real_polynomial_degree":4,
             "certificate_complexity":(3,2,3),
             "decision_tree_depth":4,
         })
