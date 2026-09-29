@@ -11,6 +11,16 @@ def algebraic_degree(n,mask):
             if x&(1<<i): a[x]^=a[x^(1<<i)]
     return max((x.bit_count() for x,c in enumerate(a) if c),default=0)
 
+def real_polynomial_degree(n,mask):
+    """Degree of the unique real multilinear polynomial representing f on {0,1}^n."""
+    a=[bit(mask,x) for x in range(1<<n)]
+    for i in range(n):
+        b=1<<i
+        for x in range(1<<n):
+            if x&b:
+                a[x]-=a[x^b]
+    return max((x.bit_count() for x,coef in enumerate(a) if coef!=0),default=0)
+
 def sensitivity_at(n,mask,x):
     return sum(bit(mask,x)!=bit(mask,x^(1<<i)) for i in range(n))
 
@@ -67,6 +77,7 @@ def conventional_profile(n,mask):
     return {
         "block_sensitivity":block_sensitivity(n,mask),
         "algebraic_degree":algebraic_degree(n,mask),
+        "real_polynomial_degree":real_polynomial_degree(n,mask),
         "certificate_complexity":certificate_complexity(n,mask),
         "decision_tree_depth":deterministic_decision_tree_depth(n,mask),
     }
