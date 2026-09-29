@@ -1215,3 +1215,66 @@ quad	ext{while}quad
 or another asymptotically nontrivial separation.
 
 This is the threshold for moving from a strong framework/no-go study to a substantially stronger complexity-theoretic contribution.
+
+
+---
+
+## 25. Stronger conventional-complexity controls
+
+The F126/F395 witness was tested against additional exact Boolean-function measures.
+
+For both functions:
+
+[
+bs(f)=4,
+qquad
+deg_{mathrm{ANF}}(f)=4,
+qquad
+D(f)=4,
+qquad
+C(f)=4.
+]
+
+Here (bs) is block sensitivity, (deg_{mathrm{ANF}}) is exact algebraic degree over the Boolean algebraic normal form, (D) is deterministic decision-tree depth, and (C) is worst-case certificate complexity.
+
+The one-sided certificate profiles are exchanged:
+
+[
+F126:quad(C,C_0,C_1)=(4,3,4),
+]
+
+[
+F395:quad(C,C_0,C_1)=(4,4,3).
+]
+
+Output complementation exchanges (C_0) and (C_1), so the unordered one-sided certificate profile is the same:
+
+[
+{C_0,C_1}={3,4}.
+]
+
+Thus the pair agrees on the following controlled summary:
+
+[
+S^*(f)=
+(
+\operatorname{ess},
+|E|,
+s,
+H_{\deg},
+\rho,
+bs,
+\deg_{\mathrm{ANF}},
+D,
+C,
+\{C_0,C_1\}
+).
+]
+
+Nevertheless their residual sensitivity-graph component sizes, matching numbers, and diameter profiles remain different.
+
+### Proposition 10 — strengthened matched witness
+
+F126 and F395 are indistinguishable by (S^*) above, up to the natural output-label symmetry in one-sided certificate complexity, but are distinguishable by residual sensitivity-graph geometry.
+
+This does not yet establish a physical-resource separation. It substantially strengthens the control witness that any proposed operational model must explain.
