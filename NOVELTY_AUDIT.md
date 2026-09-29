@@ -87,3 +87,16 @@ This is a valid finite separation, but the sensitivity graph and spectral sensit
 | Spectral sensitivity | 0/100 as project novelty | established |
 | Non-spectral sensitivity-graph geometry as physical predictor | 60–70/100 potential | test next |
 | A theorem linking such geometry to physical feasibility beyond known measures | 80+/100 potential | breakthrough target |
+
+
+## Physical-layout novelty audit
+
+The direct embedding route was stress-tested.
+
+- Natural hypercube layout: total wire length collapses exactly to sensitive-edge count.
+- Free one-dimensional layout: minimizing total edge length is the established Minimum Linear Arrangement problem.
+- General graph embedding/layout has extensive VLSI, network-layout and combinatorial-optimization literature.
+
+Therefore "physical embedding cost of the sensitivity graph" is not sufficient as the project's novelty.
+
+The surviving novelty claim must be a **coupled feasibility law** rather than a single graph parameter.
