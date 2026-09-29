@@ -46,7 +46,9 @@ def search_layer(n=5,k=4):
             candidate_groups.append((strong_key(n,group[0]),
                                      [(m,residual_key(analyze(n,m))) for m in group]))
     return {"n":n,"k":k,"raw":raw,"unique_canonical":len(seen),
-            "cheap_buckets":len(buckets),"strong_separations":candidate_groups}
+            "cheap_buckets":len(buckets),
+            "cheap_collision_classes":sum(1 for v in buckets.values() if len(v)>1),
+            "strong_separations":candidate_groups}
 
 def main():
     ap=argparse.ArgumentParser()
@@ -56,6 +58,7 @@ def main():
     print("n",r["n"],"k",r["k"],"raw",r["raw"],
           "unique_canonical",r["unique_canonical"],
           "cheap_buckets",r["cheap_buckets"],
+          "cheap_collision_classes",r["cheap_collision_classes"],
           "strong_separations",len(r["strong_separations"]))
     for key,items in r["strong_separations"][:20]:
         print("SUMMARY",key)
