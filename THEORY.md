@@ -1045,3 +1045,173 @@ Consequently neither construction, by itself, supplies the missing new physical-
 ### Implication
 
 A publishable new invariant must couple computational transition geometry to a physical constraint not already exhausted by standard graph layout. Candidate constraints must be motivated by the computation itself, for example simultaneous requirements on layout, noisy distinguishability, refresh, and reusable architecture. Merely renaming graph-layout cost as physical complexity is excluded.
+
+
+---
+
+## 22. Summary-mediated model blindness
+
+Let (mathcal F_n) be a family of Boolean functions and let
+
+[
+S:mathcal F_n	oSigma
+]
+
+be a summary map. A physical-cost model (C) is **(S)-mediated** if there exists a map (Phi) such that
+
+[
+C(f)=Phi(S(f))
+]
+
+for every (finmathcal F_n).
+
+The summary may contain several quantities simultaneously, for example essential-variable count, sensitive-edge count, maximum sensitivity, directional sensitivity counts, degree histogram, or spectral radius.
+
+### Theorem 9 — Summary-Mediated Blindness
+
+If (C) is (S)-mediated and
+
+[
+S(f)=S(g),
+]
+
+then
+
+[
+oxed{C(f)=C(g)}.
+]
+
+Consequently, if a target physical phenomenon (T) separates (f) and (g),
+
+[
+T(f)
+e T(g),
+]
+
+then no (S)-mediated model can represent (T) exactly on the whole function family.
+
+### Proof
+
+By (S)-mediation,
+
+[
+C(f)=Phi(S(f)).
+]
+
+If (S(f)=S(g)), substitution gives
+
+[
+C(f)=Phi(S(f))
+=Phi(S(g))
+=C(g).
+]
+
+The second statement follows by contradiction. \(square\)
+
+### Important novelty boundary
+
+The abstract theorem is a factorization observation and is not claimed as a deep standalone mathematical theorem. Its scientific value comes only from:
+
+1. choosing a physically meaningful summary class;
+2. proving that broad physical model families factor through that summary;
+3. constructing matched Boolean witnesses;
+4. identifying a physically justified target phenomenon that does not factor through the summary.
+
+Without items 2–4, the theorem is only a formal bookkeeping statement.
+
+---
+
+## 23. Concrete blindness hierarchy
+
+The previous propositions instantiate Theorem 9.
+
+### Coordinate-separable transport
+
+If
+
+[
+C(f)=F(w_1(f),ldots,w_n(f)),
+]
+
+then (S(f)=(w_1,ldots,w_n)). Residual adjacency among sensitivity edges is invisible.
+
+### Endpoint-conflict protection
+
+For endpoint-exclusive servicing of sensitive transitions,
+
+[
+C(f)=chi'(G_f)=Delta(G_f)=s(f),
+]
+
+because (G_f) is bipartite. Thus (S(f)=s(f)).
+
+### Native hypercube wire length
+
+[
+C(f)=|E_f|,
+]
+
+so (S(f)=|E_f|).
+
+### Spectral summaries
+
+Any proposed cost of the form
+
+[
+C(f)=Phi(operatorname{ess}(f),|E_f|,s(f),H_{deg}(f),ho(G_f))
+]
+
+must assign equal cost to F126 and F395, because they agree on every argument.
+
+Yet their residual graph structures differ:
+
+[
+(7,7),,
+u=6,,D=(4,4)
+]
+
+versus
+
+[
+(9,5),,
+u=5,,D=(6,4).
+]
+
+This proves incompleteness of that summary for reconstructing those graph properties. It does **not** yet prove that any real physical cost differs between F126 and F395.
+
+---
+
+## 24. Criterion for the central paper theorem
+
+A central theorem suitable for the eventual paper must go beyond Summary-Mediated Blindness.
+
+It should establish a physically motivated model class (mathcal M) and a resource (R_{mathcal M}) such that:
+
+[
+S(F126)=S(F395)
+]
+
+but
+
+[
+oxed{
+R_{mathcal M}(F126)
+e R_{mathcal M}(F395)
+}.
+]
+
+Preferably the result should extend to an infinite family rather than a single four-variable witness.
+
+The strongest desired form is
+
+[
+S(f_k)=S(g_k)
+quad	ext{while}quad
+rac{R_{mathcal M}(f_k)}
+{R_{mathcal M}(g_k)}
+	oinfty
+]
+
+or another asymptotically nontrivial separation.
+
+This is the threshold for moving from a strong framework/no-go study to a substantially stronger complexity-theoretic contribution.
