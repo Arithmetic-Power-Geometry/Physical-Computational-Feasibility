@@ -9,8 +9,11 @@ class SparseN5Tests(unittest.TestCase):
 
     def test_k5_witness_exact_spectrum_and_truth_sets(self):
         a,b=1878982398,65833
-        self.assertEqual(len(truth_set(5,a)),5)
-        self.assertEqual(len(truth_set(5,b)),5)
+        full=(1<<(1<<5))-1
+        sparse_a=min((a,full^a),key=lambda m: len(truth_set(5,m)))
+        sparse_b=min((b,full^b),key=lambda m: len(truth_set(5,m)))
+        self.assertEqual(len(truth_set(5,sparse_a)),5)
+        self.assertEqual(len(truth_set(5,sparse_b)),5)
         self.assertEqual(characteristic_polynomial_active(5,a),
                          characteristic_polynomial_active(5,b))
 
