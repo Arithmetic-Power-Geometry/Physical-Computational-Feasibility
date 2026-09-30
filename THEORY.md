@@ -1,1420 +1,261 @@
 # Theory
 
-## 1. Scope
+## Sensitivity graph
 
-The project studies which combinations of physical resources are necessary for a system to compute a target function reliably.
-
-The starting point is deliberately conservative:
-
-- no computational advantage is inferred from a short logical description alone;
-- no analog advantage is inferred from compact state dimension alone;
-- no physical relaxation advantage is inferred from equilibrium alone;
-- no learning/self-organization advantage is inferred without counting acquisition cost;
-- no global observable is treated as free if its implementation, preparation or readout already contains the answer.
-
-The framework therefore separates the full computation into stages
-
-\[
-x
-\xrightarrow{\mathcal E}
-S_0
-\xrightarrow{\mathcal D}
-S_T
-\xrightarrow{\mathcal M}
-Y,
-\]
-
-where \(\mathcal E\) is encoding/preparation, \(\mathcal D\) physical dynamics, and \(\mathcal M\) measurement/readout.
-
-A valid comparison must account for all three stages.
-
----
-
-## 2. Essential variables
-
-Let
-
-\[
-f:\{0,1\}^n\to\{0,1\}.
-\]
-
-Input variable \(i\) is **essential** if
-
-\[
-\exists x\in\{0,1\}^n:
+For a Boolean function
+[
+f:\{0,1\}^n\to\{0,1\},
+]
+the sensitivity graph (G_f) has vertex set ({0,1}^n). Two vertices (x) and (x\oplus e_i) are adjacent exactly when
+[
 f(x)\ne f(x\oplus e_i).
-\]
+]
+
+Vertices of degree zero are inactive. The graph induced by the non-isolated vertices is the active sensitivity graph. Pointwise sensitivity is exactly graph degree:
+[
+s(f,x)=\deg_{G_f}(x),
+]
+and
+[
+s(f)=\max_x s(f,x).
+]
+
+The strengthened summary used by the verified result is
+[
+S^\dagger(f)=
+\bigl(
+\operatorname{ess}(f),
+|E(G_f)|,
+s(f),
+H_{\deg}(f),
+\mathbf w^\downarrow(f),
+\operatorname{Spec}(G_f^{\mathrm{act}}),
+\deg_{\mathbb F_2}(f),
+\deg_{\mathbb R}(f),
+bs(f),
+D(f),
+C(f),
+\{C_0(f),C_1(f)\}
+\bigr).
+]
+
+The residual geometry examined is
+[
+G^\star(f)=
+\bigl(
+\operatorname{Comp}(f),
+\nu(f),
+\operatorname{Diam}(f)
+\bigr),
+]
+where (operatorname{Comp}) is the sorted active-component-size profile, (
+u) is maximum matching size, and (operatorname{Diam}) is the sorted active-component-diameter profile.
+
+## Explicit five-variable separation
 
 Define
+[
+A=\{00000,01000,10000,11100,11111\},
+]
+[
+B=\{00000,00011,00101,01000,10000\},
+]
+and let (f_A,f_B) be their indicator functions.
 
-\[
-\operatorname{ess}(f)
+The pair agrees in the following quantities:
+
+| Quantity | (f_A) | (f_B) |
+|---|---:|---:|
+| Essential variables | 5 | 5 |
+| Sensitive edges | 21 | 21 |
+| Maximum sensitivity | 5 | 5 |
+| Degree histogram | (((0,12),(1,10),(2,4),(3,2),(4,2),(5,2))) | same |
+| Sorted directional counts | ((3,3,5,5,5)) | same |
+| GF(2) degree | 5 | 5 |
+| Real multilinear degree | 5 | 5 |
+| Block sensitivity | 5 | 5 |
+| Deterministic decision-tree depth | 5 | 5 |
+| Worst-case certificate complexity | 5 | 5 |
+| Unordered one-sided certificate profile | ({3,5}) | ({3,5}) |
+| Maximum matching size | 5 | 5 |
+
+Their active adjacency matrices have the common integer characteristic polynomial
+[
+\chi(\lambda)
 =
-\left|
-\left\{
-i:
-\exists x,,
-f(x)\ne f(x\oplus e_i)
-\right\}
-\right|.
-\]
-
-Examples:
-
-- dictator \(f(x)=x_1\): \(\operatorname{ess}(f)=1\);
-- majority on \(n\) variables: \(\operatorname{ess}(f)=n\);
-- parity: \(\operatorname{ess}(f)=n\).
-
-The output entropy may be one bit in all three cases. Essential-variable count therefore captures a different requirement from output information volume.
-
----
-
-## 3. Dependency-reach proposition
-
-### Assumptions
-
-Consider a layered architecture satisfying:
-
-1. **Encoder locality:** each initial encoded component depends on at most \(e\) original input variables.
-2. **Interaction order:** each primitive at a later layer depends on at most \(q\) components from the previous layer.
-3. **Depth:** there are \(d\) interaction layers.
-4. **Readout locality:** the final decision depends on at most \(m\) layer-\(d\) components.
-
-### Proposition 1
-
-For any output computed by the architecture,
-
-\[
-\operatorname{ess}(f)\le m e q^d.
-\]
-
-Hence exact computation requires
-
-\[
-\boxed{m e q^d\ge \operatorname{ess}(f)}.
-\]
-
-### Proof
-
-An encoded component depends on at most \(e\) input variables.
-
-After one \(q\)-local layer, a component depends on at most \(eq\) original variables. Inductively, after \(d\) layers it depends on at most
-
-\[
-eq^d
-\]
-
-original variables.
-
-A readout combining at most \(m\) such components therefore depends on at most
-
-\[
-meq^d
-\]
-
-original variables. Every essential variable of \(f\) must lie in this dependency set, yielding the result. \(\square\)
-
-### Corollary: parity
-
-For
-
-\[
-P_n(x)=x_1\oplus\cdots\oplus x_n,
-\]
-
-every input variable is essential, so
-
-\[
-\boxed{meq^d\ge n}.
-\]
-
-This proposition is a generalized dependency/light-cone counting result and is not presented as a novelty claim by itself.
-
----
-
-## 4. Spatial propagation model
-
-Suppose a local physical model has:
-
-- spatial dimension \(D\);
-- bounded input density \(\rho\);
-- initial interaction radius \(r\);
-- effective propagation speed \(v\);
-- run time \(t\);
-- \(m\) local readout regions.
-
-A coarse causal-volume estimate gives
-
-\[
-N_{\mathrm{reachable}}
-\lesssim
-m\rho(r+vt)^D.
-\]
-
-A function with \(\operatorname{ess}(f)\) essential spatially distributed inputs therefore requires, subject to the stated assumptions,
-
-\[
-m\rho(r+vt)^D
-\gtrsim
-\operatorname{ess}(f).
-\]
-
-For parity this becomes
-
-\[
-m\rho(r+vt)^D\gtrsim n.
-\]
-
-This section is a model-specific locality bound; constants and geometry depend on the substrate.
-
----
-
-## 5. Reliable analog capacity
-
-If a physical representation uses \(N\) degrees of freedom and each degree of freedom admits at most \(2^p\) reliably distinguishable states, then the representation admits at most
-
-\[
-2^{Np}
-\]
-
-robust global states.
-
-Losslessly representing \(n\) arbitrary bits requires
-
-\[
-2^{Np}\ge 2^n,
-\]
-
-hence
-
-\[
-\boxed{Np\ge n}.
-\]
-
-This is a capacity bound, not a computation lower bound for one-bit functions.
-
-A one-bit function such as parity does **not** require an \(n\)-bit output channel. If an encoder maps directly to the parity bit, then the encoder has already implemented the global dependence. Therefore encoding complexity and dependency locality must remain explicit.
-
----
-
-## 6. Noise-aware distinguishability
-
-Let a physical device generate output distribution
-
-\[
-P_{Y|x}.
-\]
-
-For neighboring Boolean inputs define
-
-\[
-\Delta_i(x)
-=
-D_{\mathrm{TV}}
-\left(
-P_{Y|x},
-P_{Y|x\oplus e_i}
-\right).
-\]
-
-Whenever
-
-\[
-f(x)\ne f(x\oplus e_i),
-\]
-
-any decoder that must choose the correct value of \(f\) for both inputs with error at most \(\epsilon\) requires
-
-\[
-\boxed{
-\Delta_i(x)\ge 1-2\epsilon
-}.
-\]
-
-### Proposition 2
-
-Define
-
-\[
-\Delta_{\min}(f)
-=
-\min_{x,i:\,f(x)\ne f(x\oplus e_i)}
-\Delta_i(x).
-\]
-
-Worst-case error \(\epsilon\) implies
-
-\[
-\boxed{
-\Delta_{\min}(f)\ge1-2\epsilon
-}.
-\]
-
-### Reason
-
-For two hypotheses with equal prior probabilities, optimal binary discrimination error is
-
-\[
-P_e^*
-=
-\frac{1-D_{\mathrm{TV}}(P,Q)}{2}.
-\]
-
-If a single decoder must achieve error at most \(\epsilon\), then the relevant distributions must satisfy the stated inequality.
-
----
-
-## 7. Sensitivity-edge geometry
-
-Define the sensitivity edge set
-
-\[
-\mathcal E_f
-=
-\left\{
-(x,i):
-f(x)\ne f(x\oplus e_i)
-\right\}.
-\]
-
-Its cardinality is
-
-\[
-|\mathcal E_f|
-=
-\sum_x s(f,x),
-\]
-
-where \(s(f,x)\) is local Boolean sensitivity.
-
-Parity has
-
-\[
-s(P_n,x)=n
-\]
-
-for every \(x\), so every edge of the Boolean hypercube changes the class label.
-
-The physical encoding therefore must support reliable class separation across every parity-changing edge:
-
-\[
-D_{\mathrm{TV}}
-\left(
-P_{Y|x},
-P_{Y|x\oplus e_i}
-\right)
-\ge1-2\epsilon
+\lambda^{10}(\lambda^2-5)(\lambda^2-3)^2
+(\lambda^4-10\lambda^2+13),
+]
+equivalently
+[
+\lambda^{20}-21\lambda^{18}+162\lambda^{16}
+-578\lambda^{14}+957\lambda^{12}-585\lambda^{10}.
+]
+
+Thus the active sensitivity graphs are exactly adjacency-cospectral. Their active component geometry differs:
+[
+\operatorname{Comp}(f_A)=(16,4),
 \qquad
-\forall x,i.
-\]
-
-This motivates the main open problem:
-
-> How do physical dimension, locality, interaction order, evolution time, dynamic range, noise and readout constrain the ability to preserve a large Boolean sensitivity-edge set under a physical encoding/dynamics/readout chain?
-
----
-
-## 8. Physical computational feasibility region
-
-For problem family \(P\), resource model \(\mathcal M\), and target error \(\epsilon\), define
-
-\[
-\mathfrak F_{P,\mathcal M,\epsilon}
-=
-\left\{
-\mathbf R:
-\exists
-\text{ implementation in }\mathcal M
-\text{ using }\mathbf R
-\text{ with error}\le\epsilon
-\right\}.
-\]
-
-The resource vector may include
-
-\[
-\mathbf R=
-(N,p,e,q,d,m,t,\sigma,A,E,S,V,\ldots).
-\]
-
-No universal scalarization is assumed.
-
-The object of study is the Pareto boundary
-
-\[
-\partial\mathfrak F_{P,\mathcal M,\epsilon}.
-\]
-
-A cross-resource theorem is scientifically interesting when it identifies a necessary relation among multiple resource coordinates that cannot be reduced to a single previously known bound.
-
----
-
-## 9. Computational displacement
-
-A purported improvement in one coordinate is not automatically an advantage.
-
-For example:
-
-- reducing depth may increase interaction order;
-- reducing state dimension may require higher precision;
-- simplifying readout may move computation into encoding;
-- constant-time global response may require nonlocal preparation;
-- postselection may hide cost in success probability;
-- adaptive structure may hide cost in training or verification.
-
-### No-Hidden-Computation criterion
-
-Any claimed physical-computation advantage must explicitly account for:
-
-\[
-C_{\rm total}
-=
-C_{\rm encode}
-+
-C_{\rm prepare}
-+
-C_{\rm evolve}
-+
-C_{\rm precision}
-+
-C_{\rm measure}
-+
-C_{\rm verify}
-+
-C_{\rm failure}
-+
-C_{\rm reset},
-\]
-
-with physical resources retained separately whenever scalar addition would be unjustified.
-
----
-
-## 10. Current open theorem target
-
-The central target is not another causal-cone inequality.
-
-We seek a theorem coupling at least two genuinely different resource mechanisms, for example:
-
-- Boolean sensitivity-edge load and physical distinguishability;
-- locality/time and noise contraction;
-- analog precision and robust edge separation;
-- interaction order and required measurement margin.
-
-A representative target has the form
-
-\[
-\Psi
-\left(
-\mathcal E_f,
-q,d,t,\sigma,A,m,p
-\right)
-\ge
-L(f,\epsilon),
-\]
-
-where \(L\) is problem dependent and \(\Psi\) is not merely a repackaging of one-dimensional capacity or light-cone bounds.
-
-No such general theorem is claimed in the present theory package.
-
----
-
-## 11. Falsification rules
-
-A candidate theorem is rejected or downgraded if it reduces directly to:
-
-- circuit fan-in/depth;
-- ordinary causal cones;
-- Shannon channel capacity;
-- elementary state counting;
-- standard Boolean sensitivity/influence alone;
-- communication complexity alone;
-- rate-distortion alone;
-- thermodynamic energy-time-accuracy bounds alone;
-- an instance-specific encoder that has already solved the problem.
-
-These rules are intentional: the purpose of the repository is to discover a genuinely nontrivial cross-resource law, not to rename known results.
-
-
----
-
-## 12. Noise-contracted causal depth
-
-The previous sections separately constrain whether an essential input can reach the readout and whether a function-changing perturbation remains distinguishable. This section couples the two under an explicit contraction model.
-
-### Assumption: per-stage distinguishability contraction
-
-Consider an essential input perturbation (x\leftrightarrow x\oplus e_i). Suppose its relevant physical signal travels through a causal route of length (ell_i). Assume each noisy stage along that route is a channel whose total-variation contraction coefficient is at most
-
+\operatorname{Comp}(f_B)=(11,9),
+]
+and
 [
-0\le \eta<1.
+\operatorname{Diam}(f_A)=(6,2),
+\qquad
+\operatorname{Diam}(f_B)=(4,4).
 ]
 
-Thus, for any two distributions entering one such stage,
+Therefore (S^\dagger) does not determine either active component-size distribution or active diameter profile.
 
+## Exhaustive sparse-layer verification
+
+For (n=5), the complete sparse layers (k=|f^{-1}(1)|=4) and (k=5) are enumerated.
+
+| Layer | Raw sets | Canonical representatives | Cheap buckets | Collision classes | Strong separation classes |
+|---|---:|---:|---:|---:|---:|
+| (k=4) | 35,960 | 625 | 31 | 26 | 0 |
+| (k=5) | 201,376 | 2,674 | 63 | 63 | 1 |
+
+Canonicalization uses input-variable permutations and output complement. The (k=4) result is only a finite negative control for that enumerated layer. The central witness is verified independently using exact integer characteristic-polynomial equality.
+
+## Directional sensitivity in a sparse truth set
+
+Let (S=f^{-1}(1)), with (|S|=k), and let (E_i(S)) be the number of internal edges of (Q_n[S]) in coordinate direction (i). If (w_i(f)) denotes the number of sensitive edges in direction (i), then
 [
-D_{\mathrm{TV}}(KP,KQ)
-\le
-\eta D_{\mathrm{TV}}(P,Q).
+w_i(f)=k-2|E_i(S)|.
 ]
 
-Repeated application gives
-
+Hence, for fixed (k),
 [
-D_{\mathrm{TV}}^{\mathrm{out}}
-\le
-\eta^{\ell_i}
-D_{\mathrm{TV}}^{\mathrm{in}}
-\le
-\eta^{\ell_i}.
+|E_i(S)|=\frac{k-w_i(f)}{2}.
 ]
 
-### Proposition 3 — essential-path contraction bound
-
-If the device computes (f) with worst-case error at most (epsilon<1/2), then every function-changing perturbation routed through (ell_i) contractive stages must satisfy
-
+Summing over coordinates gives
 [
-\boxed{
-\eta^{\ell_i}\ge1-2\epsilon
-}.
+|E(G_f)|=n|S|-2|E(Q_n[S])|.
 ]
 
-### Proof
-
-Proposition 2 requires output total-variation distance at least (1-2\epsilon) for every function-changing pair. Contractivity gives output distance at most (eta^{\ell_i}). Combining the inequalities yields the result. \(\square\)
-
-For (0<\eta<1), this gives a maximum admissible noisy path length
-
-[
-\boxed{
-\ell_i
-\le
-\frac{\ln(1-2\epsilon)}{\ln\eta}
-}.
-]
-
-The numerator and denominator are both negative.
-
-### Interpretation
-
-Dependency reach imposes a **minimum** amount of propagation or aggregation. Noise contraction imposes a **maximum** amount of propagation through unrefreshed contractive stages. A reliable architecture exists only if these requirements overlap.
-
----
-
-## 13. Balanced-tree parity feasibility window
-
-Consider a balanced (q)-ary aggregation architecture with
-
-[
-e=m=1.
-]
-
-To make one readout depend on all (n) parity inputs, Proposition 1 requires
-
-[
-q^d\ge n,
-]
-
-so
-
-[
-d\ge \lceil\log_q n\rceil.
-]
-
-Under the homogeneous contraction assumption of Proposition 3, reliable computation also requires
-
-[
-d
-\le
-\frac{\ln(1-2\epsilon)}{\ln\eta}.
-]
-
-Therefore a necessary feasibility condition is
-
-[
-\boxed{
-\lceil\log_q n\rceil
-\le
-\frac{\ln(1-2\epsilon)}{\ln\eta}
-}.
-]
-
-Equivalently,
-
-[
-\boxed{
-\eta^{\lceil\log_q n\rceil}
-\ge
-1-2\epsilon
-}.
-]
-
-Ignoring the ceiling for a coarse continuous bound,
-
-[
-n
-\lesssim
-q^{
-\ln(1-2\epsilon)/\ln\eta
-}.
-]
-
-This is a **feasibility-window corollary**, not presently claimed as a new information-theoretic inequality. Its two ingredients are standard-style dependency growth and distinguishability contraction. Its role here is to make their resource conflict explicit for a problem-specific physical architecture.
-
-### Example
+## Parity-product lift
 
 Let
-
 [
-q=2,qquad \eta=0.9,qquad \epsilon=0.1.
+p_r(z)=z_1\oplus\cdots\oplus z_r
+]
+and define
+[
+F_r(x,z)=f_A(x)\oplus p_r(z),
+\qquad
+G_r(x,z)=f_B(x)\oplus p_r(z).
 ]
 
-Reliability requires output distinguishability at least
-
+For every (r\ge0),
 [
-1-2\epsilon=0.8.
+G_{F_r}=G_{f_A}\square Q_r,
+\qquad
+G_{G_r}=G_{f_B}\square Q_r.
 ]
 
-The contraction constraint permits at most
+Because adjacency eigenvalues of a Cartesian product are pairwise sums of factor eigenvalues, exact cospectrality is preserved.
 
+The base full graphs each contain 12 isolated vertices. For (r\ge1), each such vertex produces a component isomorphic to (Q_r). Therefore
 [
-d
-\le
-\frac{\ln 0.8}{\ln 0.9}
-\approx2.12.
+\operatorname{Comp}(F_r)=
+\bigl(
+16\cdot2^r,
+4\cdot2^r,
+\underbrace{2^r,\ldots,2^r}_{12}
+\bigr),
 ]
-
-Thus an integer-depth architecture can use at most two unrefreshed contractive aggregation stages. Binary parity dependency requires
-
 [
-d\ge\lceil\log_2 n\rceil.
+\operatorname{Comp}(G_r)=
+\bigl(
+11\cdot2^r,
+9\cdot2^r,
+\underbrace{2^r,\ldots,2^r}_{12}
+\bigr),
 ]
-
-Consequently this simplified model can support at most
-
-[
-n\le4
-]
-
-inputs under these assumptions.
-
-This example is intentionally small: it demonstrates the collision of resource constraints, not a universal parity limit.
-
----
-
-## 14. Limits of Proposition 3
-
-The contraction theorem does not apply unchanged when:
-
-- intermediate error correction or signal regeneration increases distinguishability using additional resources;
-- fresh ancillas, redundancy or external free energy are injected;
-- different stages have different contraction coefficients;
-- multiple causal routes combine;
-- the relevant metric is quantum trace distance rather than classical total variation;
-- the physical dynamics are not Markovian stagewise channels.
-
-These are not loopholes to ignore. They define the next resource coordinates that must be charged.
-
-For heterogeneous stages,
-
-[
-D_{\mathrm{TV}}^{\mathrm{out}}
-\le
-\left(\prod_{j=1}^{\ell_i}\eta_j\right)
-D_{\mathrm{TV}}^{\mathrm{in}},
-]
-
-giving the necessary condition
-
-[
-\boxed{
-\prod_{j=1}^{\ell_i}\eta_j
-\ge1-2\epsilon
-}.
-]
-
-The next theory target is to include **refresh/regeneration cost** explicitly and determine whether increasing distinguishability after contraction necessarily consumes a quantifiable resource such as redundancy, energy, fresh low-entropy ancillas, extra time, or additional physical volume.
-
-
-
----
-
-## 15. Regeneration and side-information accounting
-
-A passive channel acting only on the current carrier cannot increase total-variation distinguishability. Therefore any apparent regeneration step that raises task-relevant distinguishability must use resources not contained in that degraded carrier alone.
-
-Represent an active refresh stage as
-
-\[
-(S,Z)\xrightarrow{\mathcal R}S',
-\]
-
-where \(S\) is the degraded carrier and \(Z\) denotes additional physical resources such as redundant copies, correlated side information, fresh ancillas, external observations, or newly supplied task-relevant information.
-
-The key accounting rule is:
-
-> Distinguishability restoration is not free merely because it occurs inside a physical device; the source, preparation and reliability of \(Z\) must be included in the feasibility vector.
-
-This rule does not by itself provide a new lower bound. Reliable noisy computation already has deep theories of redundancy, noise thresholds and signal propagation. In particular, known results lower-bound reliable noisy-circuit size in terms of sensitivity and block sensitivity, including logarithmic redundancy for parity-like functions.
-
-### Consequence for this project
-
-The project will not claim that "regeneration requires redundancy" is new.
-
-Instead, refresh is represented explicitly by additional coordinates, for example
-
-\[
-\mathbf R_{\rm refresh}
-=
-(r, a, v, \tau, \xi, \ldots),
-\]
-
-where possible coordinates include redundancy width \(r\), fresh-ancilla count \(a\), physical volume \(v\), refresh time \(\tau\), and a model-specific reliability/resource coordinate \(\xi\).
-
-A candidate cross-resource result must outperform a simple restatement of known noisy-circuit redundancy or contraction results.
-
----
-
-## 16. Refined research target
-
-After prior-art falsification, the target is now:
-
-\[
-\boxed{
-\text{task geometry}
-+
-\text{dependency reach}
-+
-\text{noise}
-+
-\text{explicit refresh resources}
-\Longrightarrow
-\text{a model-specific feasibility boundary}
-}
-\]
-
-with three requirements:
-
-1. the dependency component cannot be reduced to ordinary output entropy;
-2. the noise/refresh component cannot be reduced to a standard contraction coefficient or known noisy-gate redundancy theorem;
-3. the resulting inequality must make a new quantitative prediction for at least one explicit physical architecture.
-
-This is the threshold that must be met before the project claims a new theorem beyond framework synthesis.
-
-
----
-
-## 17. Finite separation: scalar sensitivity does not determine sensitivity-edge geometry
-
-For a Boolean function (f), let (G_f) be the graph on ({0,1}^n) containing exactly the hypercube edges across which (f) changes value.
-
-An exhaustive enumeration at (n=4) produces a matched pair of Boolean functions with truth-table masks 111 and 393 (using lexicographic integer inputs (0,ldots,15), least-significant mask bit corresponding to input 0000).
-
-Both functions have:
-
-- 4 essential variables;
-- 12 undirected sensitive edges (directed total sensitivity 24);
-- maximum sensitivity 3;
-- identical sensitivity-degree histogram: two vertices of degree 0, eight of degree 1, two of degree 2, and four of degree 3.
-
-Yet their sensitivity graphs are not geometrically equivalent under these summaries.
-
-### Function F111
-
-One-set:
-
-[
-\{0000,0001,0010,0011,0101,0110\}.
-]
-
-Active sensitivity-graph component sizes:
-
-[
-\boxed{10,2,2}.
-]
-
-Maximum-matching size:
-
-[
-\boxed{6}.
-]
-
-Active-component diameters:
-
-[
-\boxed{6,1,1}.
-]
-
-Adjacency spectral radius:
-
-[
-\boxed{\sqrt 6\approx2.44949}.
-]
-
-### Function F393
-
-One-set:
-
-[
-\{0000,0011,0111,1000\}.
-]
-
-Active sensitivity-graph component sizes:
-
-[
-\boxed{6,4,4}.
-]
-
-Maximum-matching size:
-
-[
-\boxed{4}.
-]
-
-Active-component diameters:
-
-[
-\boxed{4,2,2}.
-]
-
-Adjacency spectral radius:
-
-[
-\boxed{\sqrt 5\approx2.23607}.
-]
-
-### Proposition 4 — geometry separation
-
-Essential-variable count, total sensitivity, maximum sensitivity, and the complete vertex sensitivity-degree histogram do not determine the connectivity, component-size distribution, matching number, diameter profile, or spectral radius of a Boolean function's sensitivity graph.
-
-### Proof
-
-The explicit pair F111/F393 has identical values for all four stated scalar/profile quantities but different values for each listed graph-geometric quantity. Therefore those summaries cannot determine the latter. \(\square\)
-
-### Novelty boundary
-
-The sensitivity graph itself is established in Boolean-function complexity, and its adjacency spectral norm is studied as spectral sensitivity. Proposition 4 therefore does **not** claim invention of the sensitivity graph or spectral sensitivity.
-
-The research question is narrower:
-
-> Do non-spectral geometric properties of (G_f), when combined with an explicit physical locality/noise model, predict physical resource requirements not captured by sensitivity, block sensitivity, spectral sensitivity, or standard query/circuit measures?
-
-This is now an experimentally falsifiable question and provides the transition point from pure theory to exhaustive software search.
-
-
----
-
-## 18. Stronger finite separation with matched spectral sensitivity
-
-Exhaustive enumeration of all 65,536 four-variable Boolean functions yields a stronger controlled pair: F126 and F395.
-
-Their one-sets are
-
-[
-F126^{-1}(1)=\{0001,0010,0011,0100,0101,0110\},
-]
-
-[
-F395^{-1}(1)=\{0000,0001,0011,0111,1000\}.
-]
-
-They have identical:
-
-- essential-variable count: 4;
-- undirected sensitive-edge count: 12;
-- maximum sensitivity: 3;
-- complete sensitivity-degree histogram:
-  [
-  0^2,1^6,2^6,3^2;
-  ]
-- adjacency spectral radius:
-  [
-  \boxed{\rho(G_f)=2}.
-  ]
-
-Nevertheless,
-
-[
-F126:\quad
-\text{active components}=(7,7),\;
-\nu=6,\;
-\text{diameters}=(4,4),
-]
-
-while
-
-[
-F395:\quad
-\text{active components}=(9,5),\;
-\nu=5,\;
-\text{diameters}=(6,4).
-]
-
-Here (
-u) is the maximum-matching number.
-
-### Proposition 5 — spectral-matched residual-geometry separation
-
-Essential-variable count, sensitive-edge count, maximum sensitivity, the full sensitivity-degree histogram, and sensitivity-graph spectral radius do not jointly determine sensitivity-graph component sizes, maximum-matching number, or diameter profile.
-
-### Proof
-
-F126 and F395 agree on every quantity in the premise and differ on every listed residual-geometric quantity. \(\square\)
-
-The exhaustive (n=4) search finds four matched scalar+spectral classes with differing residual geometry, so the phenomenon is not unique to this witness.
-
-### Research significance
-
-This proposition is a graph-theoretic separation, not yet a physical-computation lower bound. Its role is to remove spectral radius as a sufficient explanation for all remaining sensitivity-graph geometry.
-
-The next experiment must test whether two such spectrally matched functions have different resource requirements under the **same explicitly defined physical locality/noise model**. Only such a result could elevate residual geometry from descriptive structure to a physical-computation predictor.
-
-
----
-
-## 19. First physical model and a negative result
-
-Consider (n) input coordinates placed on sites of a one-dimensional line. Input coordinate (i) is assigned site (pi(i)), and a single readout occupies site (r).
-
-For every sensitive edge ((x,i)inmathcal E_f), the perturbation caused by flipping coordinate (i) must propagate distance
-
-[
-d_i=|pi(i)-r|.
-]
-
-Under homogeneous contraction (eta), its surviving distinguishability is modeled as
-
-[
-Delta_i=\eta^{d_i}.
-]
-
-Reliable decoding requires
-
-[
-Delta_i\ge1-2\epsilon.
-]
-
-The implementation optimizes over all input permutations and readout sites.
-
-### Negative result
-
-For the spectrally matched witness pair F126/F395, this model does not expose the residual sensitivity-graph geometry.
-
-The reason is structural. Its objective has the form
-
-[
-C(f)=
-\sum_i w_i(f)c_i,
-]
-
-where
-
-[
-w_i(f)
-=
-|\{x:(x,i)\in\mathcal E_f\}|
-]
-
-is the number of sensitive edges in coordinate direction (i), while (c_i) depends only on the physical distance/noise assigned to coordinate (i).
-
-Such a coordinate-separable model discards adjacency relations among different sensitive edges.
-
-### Proposition 6 — coordinate-separable blindness
-
-Any physical cost functional depending on a Boolean function only through the directional sensitive-edge counts (w_i(f)),
-
-[
-C(f)=F(w_1(f),\ldots,w_n(f)),
-]
-
-cannot distinguish two functions having the same directional sensitivity-count vector, regardless of differences in sensitivity-graph component structure, matching number, or diameter.
-
-This follows immediately because all residual graph structure is absent from the arguments of (F).
-
-### Consequence
-
-To test whether residual sensitivity-graph geometry has physical meaning, the next model must be nonseparable across sensitivity edges. Candidate mechanisms include:
-
-- state-dependent routing;
-- shared finite-capacity transport channels;
-- congestion between simultaneously protected transitions;
-- common refresh resources;
-- trajectory-dependent physical states.
-
-This negative result narrows the model class required for the next experiment.
-
-
----
-
-## 20. Shared-capacity falsification
-
-A natural attempt to make sensitivity-graph geometry operational is to impose shared protection capacity: in one round, a physical state may participate in at most one protected sensitive transition.
-
-This scheduling problem is exactly edge coloring of the sensitivity graph (G_f).
-
-Every sensitivity graph is a subgraph of the Boolean hypercube. The hypercube is bipartite, and every subgraph of a bipartite graph is bipartite. Therefore, by König's line-coloring theorem,
-
-[
-\boxed{
-\chi'(G_f)=\Delta(G_f)=s(f)
-}.
-]
-
-Thus the minimum number of endpoint-conflict-free protection rounds is already determined by maximum sensitivity.
-
-For the matched pair F126/F395,
-
-[
-s(F126)=s(F395)=3,
-]
-
-so both require exactly
-
-[
-\boxed{3}
-]
-
-such rounds.
-
-Although their maximum matching numbers differ,
-
-[
-\nu(F126)=6,qquad \nu(F395)=5,
-]
-
-that difference does not induce different edge-coloring round complexity.
-
-### Proposition 7 — endpoint-capacity collapse
-
-For any Boolean function, a shared-capacity model whose only conflict rule is that two simultaneously serviced sensitive edges may not share a Boolean state has exact round complexity equal to maximum sensitivity.
-
-Consequently this model cannot provide a physical invariant beyond (s(f)).
-
-### Consequence
-
-Residual sensitivity-graph geometry can become operational only if the physical constraints depend on more than endpoint conflict. Examples that remain logically possible include metric embedding cost, finite spatial wire length, state-dependent trajectories, component setup/reset cost, or nonlocal congestion in a physical substrate. Each must be justified independently; none is assumed to be novel.
-
-
----
-
-## 21. Physical-layout audit
-
-A direct embedding hypothesis was tested next.
-
-### Fixed Boolean-hypercube embedding
-
-If Boolean states retain their natural hypercube coordinates and each sensitivity edge is realized by its native cube edge, every sensitive edge has unit length. Hence total wire length is simply
-
-[
-L_{\rm cube}(f)=|E_f|.
-]
-
-For F126 and F395,
-
-[
-L_{\rm cube}(F126)=L_{\rm cube}(F395)=12.
-]
-
-Thus the natural hypercube embedding cannot expose their residual geometry through total edge length.
-
-### Freely optimized one-dimensional embedding
-
-If active Boolean states may instead be placed freely on a line and the objective is
-
-[
-L_{\rm line}(G_f)
-=
-\min_{\pi}
-\sum_{(u,v)\in E_f}
-|\pi(u)-\pi(v)|,
-]
-
-the resulting problem is the classical Minimum Linear Arrangement problem.
-
-Therefore minimum wire length under unrestricted linear placement is not introduced here as a new complexity measure.
-
-### Proposition 8 — layout baseline
-
-Two immediate physical-layout constructions collapse to known quantities:
-
-1. fixed natural hypercube wire length equals sensitive-edge count;
-2. optimized one-dimensional total wire length is Minimum Linear Arrangement.
-
-Consequently neither construction, by itself, supplies the missing new physical-computational invariant.
-
-### Implication
-
-A publishable new invariant must couple computational transition geometry to a physical constraint not already exhausted by standard graph layout. Candidate constraints must be motivated by the computation itself, for example simultaneous requirements on layout, noisy distinguishability, refresh, and reusable architecture. Merely renaming graph-layout cost as physical complexity is excluded.
-
-
----
-
-## 22. Summary-mediated model blindness
-
-Let (mathcal F_n) be a family of Boolean functions and let
-
-[
-S:mathcal F_n	oSigma
-]
-
-be a summary map. A physical-cost model (C) is **(S)-mediated** if there exists a map (Phi) such that
-
-[
-C(f)=Phi(S(f))
-]
-
-for every (finmathcal F_n).
-
-The summary may contain several quantities simultaneously, for example essential-variable count, sensitive-edge count, maximum sensitivity, directional sensitivity counts, degree histogram, or spectral radius.
-
-### Theorem 9 — Summary-Mediated Blindness
-
-If (C) is (S)-mediated and
-
-[
-S(f)=S(g),
-]
-
-then
-
-[
-oxed{C(f)=C(g)}.
-]
-
-Consequently, if a target physical phenomenon (T) separates (f) and (g),
-
-[
-T(f)
-e T(g),
-]
-
-then no (S)-mediated model can represent (T) exactly on the whole function family.
-
-### Proof
-
-By (S)-mediation,
-
-[
-C(f)=Phi(S(f)).
-]
-
-If (S(f)=S(g)), substitution gives
-
-[
-C(f)=Phi(S(f))
-=Phi(S(g))
-=C(g).
-]
-
-The second statement follows by contradiction. \(square\)
-
-### Important novelty boundary
-
-The abstract theorem is a factorization observation and is not claimed as a deep standalone mathematical theorem. Its scientific value comes only from:
-
-1. choosing a physically meaningful summary class;
-2. proving that broad physical model families factor through that summary;
-3. constructing matched Boolean witnesses;
-4. identifying a physically justified target phenomenon that does not factor through the summary.
-
-Without items 2–4, the theorem is only a formal bookkeeping statement.
-
----
-
-## 23. Concrete blindness hierarchy
-
-The previous propositions instantiate Theorem 9.
-
-### Coordinate-separable transport
-
-If
-
-[
-C(f)=F(w_1(f),ldots,w_n(f)),
-]
-
-then (S(f)=(w_1,ldots,w_n)). Residual adjacency among sensitivity edges is invisible.
-
-### Endpoint-conflict protection
-
-For endpoint-exclusive servicing of sensitive transitions,
-
-[
-C(f)=chi'(G_f)=Delta(G_f)=s(f),
-]
-
-because (G_f) is bipartite. Thus (S(f)=s(f)).
-
-### Native hypercube wire length
-
-[
-C(f)=|E_f|,
-]
-
-so (S(f)=|E_f|).
-
-### Spectral summaries
-
-Any proposed cost of the form
-
-[
-C(f)=Phi(operatorname{ess}(f),|E_f|,s(f),H_{deg}(f),ho(G_f))
-]
-
-must assign equal cost to F126 and F395, because they agree on every argument.
-
-Yet their residual graph structures differ:
-
-[
-(7,7),,
-u=6,,D=(4,4)
-]
-
-versus
-
-[
-(9,5),,
-u=5,,D=(6,4).
-]
-
-This proves incompleteness of that summary for reconstructing those graph properties. It does **not** yet prove that any real physical cost differs between F126 and F395.
-
----
-
-## 24. Criterion for the central paper theorem
-
-A central theorem suitable for the eventual paper must go beyond Summary-Mediated Blindness.
-
-It should establish a physically motivated model class (mathcal M) and a resource (R_{mathcal M}) such that:
-
-[
-S(F126)=S(F395)
-]
-
-but
-
-[
-oxed{
-R_{mathcal M}(F126)
-e R_{mathcal M}(F395)
-}.
-]
-
-Preferably the result should extend to an infinite family rather than a single four-variable witness.
-
-The strongest desired form is
-
-[
-S(f_k)=S(g_k)
-quad	ext{while}quad
-rac{R_{mathcal M}(f_k)}
-{R_{mathcal M}(g_k)}
-	oinfty
-]
-
-or another asymptotically nontrivial separation.
-
-This is the threshold for moving from a strong framework/no-go study to a substantially stronger complexity-theoretic contribution.
-
-
----
-
-## 25. Corrected conventional-complexity controls
-
-A subsequent exhaustive audit identified an error in the earlier reported conventional profiles for F126/F395. The incorrect Proposition 10 is withdrawn.
-
-The corrected exact values are:
-
-\[
-F126:\quad bs=3,\;\deg_{\mathrm{ANF}}=3,\;D=4,\;C=3,\;\{C_0,C_1\}=\{3,3\},
-\]
-
-\[
-F395:\quad bs=3,\;\deg_{\mathrm{ANF}}=4,\;D=4,\;C=3,\;\{C_0,C_1\}=\{2,3\}.
-\]
-
-Thus F126/F395 remains a valid scalar+spectral sensitivity-geometry separation, but it is **not** matched on algebraic degree or the one-sided certificate profile.
-
-### Exhaustive strengthened-summary audit at n=4
-
-All 65,536 four-variable Boolean functions were grouped by
-
-\[
-S^*(f)=
-(\operatorname{ess},|E|,s,H_{\deg},\rho,bs,\deg_{\mathrm{ANF}},D,C,\{C_0,C_1\}).
-\]
-
-The enumeration produced 220 distinct (S^*)-classes. For the residual geometry tuple
-
-\[
-G^*(f)=(\text{active component sizes},\nu,\text{active diameter profile}),
-\]
-
-no (S^*)-class contained more than one (G^*)-value.
-
-Therefore:
-
-\[
-\boxed{
-S^*(f)=S^*(g)\Longrightarrow G^*(f)=G^*(g)
-\quad\text{for all four-variable Boolean functions.}
-}
-\]
-
-This is a finite exhaustive fact for (n=4), not a theorem for arbitrary (n).
-
-### Consequence
-
-The strengthened matched-witness search must move beyond (n=4). Exhaustive enumeration of all five-variable Boolean functions would require (2^{32}) truth tables, so the next phase uses targeted/symmetry-aware search rather than full enumeration.
-
-Scientific correction is part of the reproducibility record; the withdrawn claim must not be used in later novelty statements.
-
-
-## 26. Sparse truth-set cut identities
-
-Let \(S=f^{-1}(1)\subseteq Q_n\), and let \(G_f=\delta(S)\) be the sensitivity graph.  Write \(E_i(S)\) for internal edges of the induced subgraph \(Q_n[S]\) in coordinate direction \(i\), and \(E(S)=\sum_i E_i(S)\).
-
-Every vertex of \(Q_n\) has one incident edge in each coordinate direction. Counting incidences from vertices of \(S\) gives the exact identities
-
-\[
-w_i(f)=|S|-2|E_i(S)|,
-\]
-
-and therefore
-
-\[
-|E(G_f)|=n|S|-2|E(S)|.
-\]
-
-Thus, once the truth-set cardinality \(|S|=k\) is fixed, the directional sensitivity profile determines the multiset of directional internal-edge counts of \(Q_n[S]\), while total sensitivity determines the total number of internal edges.  These identities explain part of the rigidity seen in sparse-layer searches, but they do **not** by themselves determine the isomorphism type of \(Q_n[S]\), the cut-component structure, matching number, diameter profile, or the other strengthened complexity measures.
-
-### Exact finite checkpoint
-
-For \(n=5\) and \(|S|=4\), exhaustive enumeration of all \(\binom{32}{4}=35{,}960\) truth sets produced 625 classes after output-complement and input-variable permutation canonicalization and 31 cheap strengthened-summary buckets. No residual-geometry separation survived the full refinement controls. This is an exhaustive statement for this layer only; it is not a theorem for all five-variable Boolean functions.
-
-
-### Directional-profile equivalence lemma
-
-For fixed \(n\) and fixed truth-set cardinality \(k=|S|\), define \(a_i(S)=|E_i(S)|\), the number of internal truth-set edges in coordinate direction \(i\). Then
-
-\[
-w_i(f)=k-2a_i(S)
-\quad\Longleftrightarrow\quad
- a_i(S)=\frac{k-w_i(f)}{2}.
-\]
-
-Hence the labeled vectors \((w_1,\ldots,w_n)\) and \((a_1,\ldots,a_n)\) determine each other exactly. After quotienting by input-variable permutations, their sorted multisets also determine each other. Consequently, within a fixed sparse layer, directional sensitivity is not an independent source of information from directional internal adjacency; it is an equivalent coordinate-wise encoding of it.
-
-**Corollary.** The parity constraints \(w_i\equiv k\pmod 2\) and bounds \(0\le w_i\le k\) are necessary for every directional profile in the \(k\)-th truth-set layer.
-
-This lemma is an exact structural simplification, not the central determination theorem: identical directional internal-edge counts need not determine the induced truth-set graph or the residual geometry of the sensitivity cut.
-
-
-## Exact strengthened separation at n=5
-
-The exhaustive \(n=5\), \(|f^{-1}(1)|=5\) campaign examined all \(\binom{32}{5}=201{,}376\) sparse truth sets and found a strengthened-summary collision with different residual sensitivity geometry. A human-readable sparse representative pair is
-
-\[
-S_A=\{00000,01000,10000,11100,11111\},
-\]
-\[
-S_B=\{00000,00011,00101,01000,10000\}.
-\]
-
-(One search representative of the first function is its output complement; output complementation leaves the sensitivity graph unchanged.)
-
-The two functions match the strengthened controls used in the search: five essential variables; 21 sensitive edges; maximum sensitivity 5; degree histogram \(((0,12),(1,10),(2,4),(3,2),(4,2),(5,2))\); sorted directional sensitivity profile \((3,3,5,5,5)\); GF(2) algebraic degree 5; real multilinear degree 5; block sensitivity 5; deterministic decision-tree depth 5; worst-case certificate complexity 5; and unordered one-sided certificate profile \(\{3,5\}\). Their active sensitivity graphs are also exactly adjacency-cospectral, as checked by equality of their integer characteristic polynomials.
-
-Nevertheless their residual geometries differ:
-
-\[
-G_A^\star=((16,4),5,(6,2)),\qquad
-G_B^\star=((11,9),5,(4,4)),
-\]
-
-where the entries are active-component sizes, matching number, and active-component diameter profile. Thus the strengthened summary does not determine active component-size distribution or active diameter profile, even after exact adjacency cospectrality is imposed.
-
-### Finite separation theorem
-
-There exist Boolean functions \(f,g:\{0,1\}^5\to\{0,1\}\) with identical values for all strengthened controls above and exactly cospectral active sensitivity graphs, but with different active-component size and diameter profiles. Therefore any model whose predicted physical resource depends only on those controls cannot, over all five-variable Boolean functions, exactly represent a resource that distinguishes either of these residual geometric properties.
-
-The exhaustive campaign establishes existence and search completeness for the stated \(n=5,k=5\) layer; the theorem itself is witnessed directly by the explicit pair and does not rely on sampling.
-
-
-### Dummy-variable lifting corollary
-
-Let \(f,g:\{0,1\}^5\to\{0,1\}\) be the exact cospectral separation pair above. For any \(r\ge 0\), define
-
-\[
-F_r(x,z)=f(x),\qquad G_r(x,z)=g(x),
-\]
-
-with \(z\in\{0,1\}^r\). No edge in a new \(z\)-coordinate is sensitive, while each fixed \(z\) slice reproduces the original sensitivity graph. Therefore
-
-\[
-G_{F_r}=\bigsqcup_{j=1}^{2^r}G_f,\qquad
-G_{G_r}=\bigsqcup_{j=1}^{2^r}G_g.
-\]
-
-Thus exact adjacency cospectrality is preserved, the original component sizes and diameters are replicated with multiplicity \(2^r\), and the geometric separation persists for every ambient dimension \(5+r\). The conventional Boolean measures in the strengthened summary are unchanged because the added variables are inessential.
-
-This yields an infinite ambient-dimension family, but **not** a growing-essential-dimension separation: both lifted functions still have exactly five essential variables. It is therefore a useful closure corollary rather than the desired asymptotic strengthening.
-
-
-### Parity-product essential-dimension lift
-
-A stronger graph-theoretic lift makes every added coordinate essential. Let \(p_r(z)=z_1\oplus\cdots\oplus z_r\) and define
-
-\[
-F_r(x,z)=f(x)\oplus p_r(z),\qquad
-G_r(x,z)=g(x)\oplus p_r(z).
-\]
-
-For an \(x\)-coordinate, sensitivity is exactly inherited from \(f\) or \(g\). Every \(z\)-coordinate is sensitive at every input. Consequently
-
-\[
-G_{F_r}=G_f\,\square\,Q_r,\qquad
-G_{G_r}=G_g\,\square\,Q_r,
-\]
-
-where \(\square\) denotes Cartesian graph product. Hence all \(5+r\) variables are essential. If \(G_f\) and \(G_g\) are adjacency-cospectral, then their products with the same \(Q_r\) are adjacency-cospectral because the Cartesian-product adjacency spectrum consists of pairwise sums of factor eigenvalues.
-
-Each connected component \(C\) of a base graph produces \(C\square Q_r\). Therefore component sizes are multiplied by \(2^r\), while component diameters increase by \(r\):
-
-\[
-(16,4)\mapsto(16\cdot2^r,4\cdot2^r),\qquad
-(11,9)\mapsto(11\cdot2^r,9\cdot2^r),
-\]
-
 and
+[
+\operatorname{Diam}(F_r)=
+\bigl(
+6+r,
+2+r,
+\underbrace{r,\ldots,r}_{12}
+\bigr),
+]
+[
+\operatorname{Diam}(G_r)=
+\bigl(
+4+r,
+4+r,
+\underbrace{r,\ldots,r}_{12}
+\bigr).
+]
 
-\[
-(6,2)\mapsto(6+r,2+r),\qquad
-(4,4)\mapsto(4+r,4+r).
-\]
+At (r=0), omitting isolated vertices recovers the base active profiles.
 
-Thus the exact cospectral geometric separation extends to every essential dimension \(5+r\) at the graph level.
+## Complexity under parity lift
 
-This lift is stated only for properties proved above. Equality of the full strengthened Boolean-complexity summary under the parity product requires separate proofs for block sensitivity, certificates, decision-tree depth, and polynomial degrees before being claimed.
+For a nonconstant Boolean function (h), write
+[
+H_r(x,z)=h(x)\oplus p_r(z).
+]
 
+Then
+[
+s(H_r)=s(h)+r,
+\qquad
+bs(H_r)=bs(h)+r,
+\qquad
+D(H_r)=D(h)+r.
+]
 
-### Full strengthened-summary lifting theorem
+Pointwise certificate complexity satisfies
+[
+C(H_r;(x,z))=C(h;x)+r,
+]
+so
+[
+C(H_r)=C(h)+r.
+]
 
-For a Boolean function \(h\) on variables disjoint from \(z\), let
-\[
-H_r(x,z)=h(x)\oplus p_r(z),\qquad p_r(z)=z_1\oplus\cdots\oplus z_r.
-\]
-The following identities hold for \(r\ge 0\):
+For (r\ge1),
+[
+C_0(H_r)=C_1(H_r)=C(h)+r.
+]
 
-- every new parity coordinate is sensitive at every input, so \(s(H_r)=s(h)+r\);
-- the \(r\) singleton parity coordinates form sensitive blocks disjoint from any optimal family of base sensitive blocks, while projecting any disjoint sensitive-block family onto the base/parity coordinates gives the reverse bound, hence \(bs(H_r)=bs(h)+r\);
-- every certificate must fix all \(r\) parity coordinates (otherwise flipping an unfixed parity bit changes the output), and after fixing them it must certify the corresponding base output; hence pointwise certificate size is \(C_h(x)+r\), so \(C(H_r)=C(h)+r\) and the unordered one-sided profile is the base unordered profile shifted by \(r\);
-- a deterministic decision tree must determine parity on all \(r\) fresh bits and determine the base value, giving \(D(H_r)=D(h)+r\);
-- over GF(2), the ANF is the XOR of the base polynomial and the \(r\) degree-one parity variables, so for the nonconstant base witnesses \(\deg_{\mathrm{ANF}}(H_r)=\deg_{\mathrm{ANF}}(h)\) when the base degree exceeds one, rather than adding \(r\);
-- over the reals, parity on \(r\) bits has multilinear degree \(r\), and the XOR identity \(a\oplus b=a+b-2ab\) gives \(\deg_{\mathbb R}(H_r)=\deg_{\mathbb R}(h)+r\) for nonconstant \(h\).
+The block-sensitivity identity follows because an optimal disjoint sensitive-block family for (h) can be augmented by the (r) fresh singleton parity coordinates, while any disjoint sensitive-block family for (H_r) contains at most (bs(h,x)) blocks with even fresh-coordinate parity and at most (r) blocks containing an odd number of fresh coordinates.
 
-At the sensitivity-graph level, \(G_{H_r}=G_h\square Q_r\). Therefore, applying the construction to the exact pair \(f,g\) preserves equality of all matched strengthened controls after the appropriate common shifts, preserves exact adjacency cospectrality, and preserves a component-size and diameter separation in every essential dimension \(5+r\).
+For deterministic decision trees, the upper bound is obtained by querying all fresh parity variables and then evaluating (h). For the lower bound, every root-to-leaf path must query every fresh coordinate; fixing their values and deleting those queries leaves a decision tree for (h) or its complement.
 
-**Infinite-family separation theorem.** For every \(N\ge5\), there exist Boolean functions \(F_N,G_N:\{0,1\}^N\to\{0,1\}\) whose strengthened Boolean-complexity summaries match (with the same labeled/sorted directional profile up to the common parity-coordinate additions) and whose sensitivity graphs are exactly adjacency-cospectral, yet whose active component-size distributions and diameter profiles differ. The family is obtained from the explicit five-variable witness by XOR with parity on \(N-5\) fresh variables.
+Every certificate must likewise fix all fresh coordinates, after which the remaining fixed original coordinates must certify the corresponding value of (h).
 
-The GF(2) degree point is important: XOR with fresh parity variables does **not** add degrees; the base degree 5 remains 5 for this witness family. This differs from the real multilinear degree, which increases by \(r\).
+For the explicit witnesses,
+[
+\deg_{\mathbb F_2}(H_r)=5,
+\qquad
+\deg_{\mathbb R}(H_r)=5+r.
+]
+
+The sensitive-edge count is
+[
+|E(G_{H_r})|
+=
+21\cdot2^r+32r2^{r-1}.
+]
+
+Original directional counts are multiplied by (2^r), each fresh coordinate contributes (16\cdot2^r) sensitive edges, and every base graph degree (d) becomes (d+r) with multiplicity multiplied by (2^r).
+
+## Infinite strengthened separation
+
+For every integer (N\ge5), set (r=N-5). Then (F_r) and (G_r) have identical strengthened summaries
+[
+S^\dagger(F_r)=S^\dagger(G_r),
+]
+their active sensitivity graphs are exactly adjacency-cospectral, and their active component-size and diameter profiles differ.
+
+The result is a non-determination theorem for Boolean sensitivity-graph geometry. It does not imply a hardware speedup, a physical lower bound, or a new computational model.
+
+## Citation
+
+Akhtar, M. A. K. (2026). _Cospectral Boolean Sensitivity Graphs Can Have Different Global Geometry: An Exact Separation and Infinite Family_ (Version V1). Zenodo. https://doi.org/10.5281/zenodo.23062628
