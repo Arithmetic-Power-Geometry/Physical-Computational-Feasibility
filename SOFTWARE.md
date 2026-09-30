@@ -1,29 +1,71 @@
 # Software
 
-This repository contains exact small-n Boolean-function analysis and reproducible search software supporting the Physical Computational Feasibility research programme.
+This repository provides the exact small-instance Boolean-function analysis and reproducible search code supporting the cospectral sensitivity-graph separation.
 
 ## Modules
 
-- `pcf.boolean_geometry`: sensitivity graphs and residual graph geometry.
-- `pcf.measures`: exact small-n Boolean complexity measures, including GF(2) ANF degree and real multilinear polynomial degree.
-- `pcf.transport`: local transport and refresh models.
-- `pcf.capacity`: endpoint-capacity models.
-- `pcf.layout`: physical-layout baselines.
-- `scripts.search_n5`: symmetry-reduced targeted n=5 search with progressive refinement.
-- `scripts.campaign_n5`: deterministic multi-seed campaign and machine-readable artifacts.
+- `pcf.boolean_geometry`: sensitivity graphs, active components, component diameters, matchings, directional sensitivity counts, and exact adjacency characteristic polynomials.
+- `pcf.measures`: exact small-instance Boolean complexity measures including block sensitivity, certificate complexity, deterministic decision-tree depth, GF(2) degree, and real multilinear degree.
+- `scripts.search_sparse_n5`: exhaustive (n=5) sparse-layer search for (k=4) and (k=5).
+- `scripts.search_n5`: targeted (n=5) search with progressive refinement.
+- `tests`: regression checks for the explicit witness and supporting invariants.
+
+## Exact witness
+
+The verified truth sets are
+
+[
+A=\{00000,01000,10000,11100,11111\},
+qquad
+B=\{00000,00011,00101,01000,10000\}.
+]
+
+For the active sensitivity graphs, exact cospectrality is verified by equality of the integer characteristic polynomial
+
+[
+\lambda^{10}(\lambda^2-5)(\lambda^2-3)^2(\lambda^4-10\lambda^2+13).
+]
+
+The graphs have active component-size profiles ((16,4)) and ((11,9)), with diameter profiles ((6,2)) and ((4,4)), respectively.
+
+## Exhaustive scope
+
+The sparse-layer search exhaustively enumerates:
+
+- all (inom{32}{4}=35{,}960) five-variable truth sets with four positive inputs;
+- all (inom{32}{5}=201{,}376) five-variable truth sets with five positive inputs.
+
+The (k=4) layer has no surviving strong separation under the implemented refinement. The (k=5) layer has one surviving strengthened separation class under the repository's stated canonicalization and refinement procedure.
+
+Full enumeration of all (2^{32}) five-variable Boolean functions is not performed.
+
+## Parity lift
+
+For (H_r(x,z)=h(x)\oplus p_r(z)),
+
+[
+G_{H_r}=G_h\square Q_r.
+]
+
+The exact transformation laws used by the associated result include
+
+[
+s(H_r)=s(h)+r,quad
+bs(H_r)=bs(h)+r,quad
+D(H_r)=D(h)+r,quad
+C(H_r)=C(h)+r.
+]
+
+For (r\ge1), both one-sided certificate maxima equal (C(h)+r). For the displayed witnesses, GF(2) degree remains 5 and real multilinear degree becomes (5+r).
 
 ## Verification
 
-GitHub Actions first compiles the Python sources, then runs regression tests, then executes the n=5 campaign and uploads its CSV/JSON artifacts. A search result is not treated as evidence unless the corresponding verification workflow completes successfully.
+The workflow compiles the Python sources, runs regression tests, and executes the configured searches. Combinatorial quantities used for the reported witness are computed exactly. Numerical spectral radius is used only as a search refinement; exact integer characteristic-polynomial equality establishes the cospectrality claim.
 
-## Exact and numerical quantities
+## Environment
 
-Combinatorial quantities are computed exactly for the small instances used here. Spectral radius is used numerically during search/refinement. For the central n=5 witness, exact adjacency cospectrality is independently verified by equality of the integer characteristic polynomials of the active sensitivity graphs.
+Python 3.10 or later.
 
-## Scope
+## Citation
 
-The software is an independent research implementation. It does not generate a manuscript. A later article may report results reproduced by the software and archived artifacts.
-
-## Limitations
-
-Full enumeration of all 2^32 five-variable Boolean functions is not attempted. The structured sparse-layer search exhaustively enumerates all C(32,4)=35,960 truth sets with four positive inputs and all C(32,5)=201,376 truth sets with five positive inputs; broader n=5 random campaigns remain finite evidence only.
+Akhtar, M. A. K. (2026). _Cospectral Boolean Sensitivity Graphs Can Have Different Global Geometry: An Exact Separation and Infinite Family_ (Version V1). Zenodo. https://doi.org/10.5281/zenodo.23062628
