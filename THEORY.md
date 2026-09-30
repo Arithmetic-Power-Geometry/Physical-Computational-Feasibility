@@ -1308,3 +1308,34 @@ Hence the labeled vectors \((w_1,\ldots,w_n)\) and \((a_1,\ldots,a_n)\) determin
 **Corollary.** The parity constraints \(w_i\equiv k\pmod 2\) and bounds \(0\le w_i\le k\) are necessary for every directional profile in the \(k\)-th truth-set layer.
 
 This lemma is an exact structural simplification, not the central determination theorem: identical directional internal-edge counts need not determine the induced truth-set graph or the residual geometry of the sensitivity cut.
+
+
+## Exact strengthened separation at n=5
+
+The exhaustive \(n=5\), \(|f^{-1}(1)|=5\) campaign examined all \(\binom{32}{5}=201{,}376\) sparse truth sets and found a strengthened-summary collision with different residual sensitivity geometry. A human-readable sparse representative pair is
+
+\[
+S_A=\{00000,01000,10000,11100,11111\},
+\]
+\[
+S_B=\{00000,00011,00101,01000,10000\}.
+\]
+
+(One search representative of the first function is its output complement; output complementation leaves the sensitivity graph unchanged.)
+
+The two functions match the strengthened controls used in the search: five essential variables; 21 sensitive edges; maximum sensitivity 5; degree histogram \(((0,12),(1,10),(2,4),(3,2),(4,2),(5,2))\); sorted directional sensitivity profile \((3,3,5,5,5)\); GF(2) algebraic degree 5; real multilinear degree 5; block sensitivity 5; deterministic decision-tree depth 5; worst-case certificate complexity 5; and unordered one-sided certificate profile \(\{3,5\}\). Their active sensitivity graphs are also exactly adjacency-cospectral, as checked by equality of their integer characteristic polynomials.
+
+Nevertheless their residual geometries differ:
+
+\[
+G_A^\star=((16,4),5,(6,2)),\qquad
+G_B^\star=((11,9),5,(4,4)),
+\]
+
+where the entries are active-component sizes, matching number, and active-component diameter profile. Thus the strengthened summary does not determine active component-size distribution or active diameter profile, even after exact adjacency cospectrality is imposed.
+
+### Finite separation theorem
+
+There exist Boolean functions \(f,g:\{0,1\}^5\to\{0,1\}\) with identical values for all strengthened controls above and exactly cospectral active sensitivity graphs, but with different active-component size and diameter profiles. Therefore any model whose predicted physical resource depends only on those controls cannot, over all five-variable Boolean functions, exactly represent a resource that distinguishes either of these residual geometric properties.
+
+The exhaustive campaign establishes existence and search completeness for the stated \(n=5,k=5\) layer; the theorem itself is witnessed directly by the explicit pair and does not rely on sampling.
