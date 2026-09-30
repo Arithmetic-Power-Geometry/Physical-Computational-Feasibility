@@ -14,7 +14,7 @@ The repository follows this order:
 4. **Workflow** — reproducible GitHub Actions execution.
 5. **Artifacts** — machine-generated CSV/JSON/figures/tables produced by the workflow.
 
-No manuscript is generated from the repository. The repository is an independent theory-and-software research package; any later paper may use verified results and artifacts produced here.
+The repository is an independent theory-and-software research package. Papers may use and scientifically interpret verified results and artifacts produced by the research workflow.
 
 ## Core object
 
@@ -136,9 +136,9 @@ See [THEORY.md](THEORY.md) and [NOVELTY_AUDIT.md](NOVELTY_AUDIT.md).
 
 ## Current scientific status
 
-This repository begins from a **validated framework plus open theorem targets**, not from a claimed breakthrough.
+The repository now contains an exact Boolean sensitivity-geometry separation theorem. In the complete five-variable layer with five positive inputs, an explicit pair matches a strengthened collection of Boolean complexity controls and has exactly adjacency-cospectral active sensitivity graphs, yet has different active component-size and diameter profiles. A parity-product construction lifts the separation to every essential dimension N >= 5.
 
-The strongest open target is a nontrivial cross-resource lower bound connecting Boolean-function sensitivity/dependency geometry to physical distinguishability under explicit locality, noise, precision and time constraints.
+The result is a theorem about what these summaries and spectra do not determine. It does not establish a hardware speedup, a new computational model, or a new physical law.
 
 ## License
 
