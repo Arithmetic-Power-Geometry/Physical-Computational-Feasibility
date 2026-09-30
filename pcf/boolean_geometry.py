@@ -90,6 +90,31 @@ def spectral_radius(adj,iterations=200):
         lam2=sum(x[i]*a2[i] for i in range(nv))
     return sqrt(max(lam2,0.0))
 
+def characteristic_polynomial_active(n,mask):
+    """Exact adjacency characteristic polynomial of the active sensitivity graph.
+
+    Returns coefficients of det(lambda I-A), highest degree first, using
+    Faddeev-LeVerrier with exact integer arithmetic.
+    """
+    edges=sensitivity_edges(n,mask); full_adj=adjacency(n,edges)
+    active=[v for v in range(1<<n) if full_adj[v]]
+    m=len(active)
+    if m==0: return (1,)
+    pos={v:i for i,v in enumerate(active)}
+    A=[[0]*m for _ in range(m)]
+    for v in active:
+        for w in full_adj[v]:
+            if w in pos: A[pos[v]][pos[w]]=1
+    I=[[int(i==j) for j in range(m)] for i in range(m)]
+    B=[row[:] for row in I]; coeff=[1]
+    for k in range(1,m+1):
+        AB=[[sum(A[i][t]*B[t][j] for t in range(m)) for j in range(m)] for i in range(m)]
+        tr=sum(AB[i][i] for i in range(m))
+        assert tr%k==0
+        ck=-(tr//k); coeff.append(ck)
+        B=[[AB[i][j]+ck*I[i][j] for j in range(m)] for i in range(m)]
+    return tuple(coeff)
+
 def analyze(n,mask):
     edges=sensitivity_edges(n,mask); adj=adjacency(n,edges)
     deg=[len(x) for x in adj]; comps=components(adj); active=components(adj,True)
