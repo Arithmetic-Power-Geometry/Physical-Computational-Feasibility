@@ -1291,3 +1291,20 @@ Thus, once the truth-set cardinality \(|S|=k\) is fixed, the directional sensiti
 ### Exact finite checkpoint
 
 For \(n=5\) and \(|S|=4\), exhaustive enumeration of all \(\binom{32}{4}=35{,}960\) truth sets produced 625 classes after output-complement and input-variable permutation canonicalization and 31 cheap strengthened-summary buckets. No residual-geometry separation survived the full refinement controls. This is an exhaustive statement for this layer only; it is not a theorem for all five-variable Boolean functions.
+
+
+### Directional-profile equivalence lemma
+
+For fixed \(n\) and fixed truth-set cardinality \(k=|S|\), define \(a_i(S)=|E_i(S)|\), the number of internal truth-set edges in coordinate direction \(i\). Then
+
+\[
+w_i(f)=k-2a_i(S)
+\quad\Longleftrightarrow\quad
+ a_i(S)=\frac{k-w_i(f)}{2}.
+\]
+
+Hence the labeled vectors \((w_1,\ldots,w_n)\) and \((a_1,\ldots,a_n)\) determine each other exactly. After quotienting by input-variable permutations, their sorted multisets also determine each other. Consequently, within a fixed sparse layer, directional sensitivity is not an independent source of information from directional internal adjacency; it is an equivalent coordinate-wise encoding of it.
+
+**Corollary.** The parity constraints \(w_i\equiv k\pmod 2\) and bounds \(0\le w_i\le k\) are necessary for every directional profile in the \(k\)-th truth-set layer.
+
+This lemma is an exact structural simplification, not the central determination theorem: identical directional internal-edge counts need not determine the induced truth-set graph or the residual geometry of the sensitivity cut.
