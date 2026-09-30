@@ -1,144 +1,128 @@
-# Physical Computational Feasibility
+# Cospectral Boolean Sensitivity Graphs Can Have Different Global Geometry
 
-A theory-first research repository for studying **problem-specific physical resource limits of computation** under explicit constraints on encoding, interaction locality, depth/time, readout, noise, precision, and physical information capacity.
+Research software and exact verification for the Boolean sensitivity-graph separation described in:
 
-The project does **not** assume that a shorter logical circuit, a compact analog representation, a global physical response, or a self-organizing substrate provides a computational advantage by itself. The central requirement is that all resources capable of carrying hidden computation are accounted for.
+**Mohammad Amir Khusru Akhtar (2026). _Cospectral Boolean Sensitivity Graphs Can Have Different Global Geometry: An Exact Separation and Infinite Family_. Version V1. Zenodo. https://doi.org/10.5281/zenodo.23062628**
 
-## Research program
+## Result
 
-The repository follows this order:
+For Boolean functions (f:{0,1}^n\to{0,1}), the sensitivity graph joins Hamming-neighbor inputs exactly when flipping the corresponding coordinate changes the output.
 
-1. **Theory** — definitions, propositions, lower bounds, counterexamples, and open conjectures.
-2. **Software** — exact and numerical implementations of the theoretical quantities.
-3. **Tests and comparisons** — parity, majority, dictator, threshold and other Boolean-function families under multiple resource models.
-4. **Workflow** — reproducible GitHub Actions execution.
-5. **Artifacts** — machine-generated CSV/JSON/figures/tables produced by the workflow.
+The repository verifies an explicit five-variable pair
 
-The repository is an independent theory-and-software research package. Papers may use and scientifically interpret verified results and artifacts produced by the research workflow.
+[
+A=\{00000,01000,10000,11100,11111\},
+]
 
-## Core object
+[
+B=\{00000,00011,00101,01000,10000\},
+]
 
-For a problem family \(P\), define a resource vector
+with indicator functions (f_A) and (f_B).
 
-\[
-\mathbf R=(N,p,e,q,d,m,t,\sigma,A,E,\ldots),
-\]
+The pair agrees in:
 
-where components may include physical state count \(N\), reliable precision \(p\), encoder dependency \(e\), interaction order \(q\), depth \(d\), readout locality \(m\), physical time \(t\), noise scale \(\sigma\), dynamic range \(A\), energy \(E\), and other explicitly modeled resources.
+- essential-variable count;
+- sensitive-edge count;
+- maximum sensitivity;
+- sensitivity-degree histogram;
+- sorted directional sensitivity counts;
+- block sensitivity;
+- deterministic decision-tree depth;
+- certificate complexity;
+- GF(2) degree;
+- real multilinear degree;
+- maximum matching size;
+- the complete adjacency spectrum of the active sensitivity graph.
 
-The **physical computational feasibility region** is
+The active sensitivity graphs nevertheless have different global geometry:
 
-\[
-\mathfrak F_P
+| Quantity | (f_A) | (f_B) |
+|---|---:|---:|
+| Active component sizes | ((16,4)) | ((11,9)) |
+| Active component diameters | ((6,2)) | ((4,4)) |
+
+Their active adjacency matrices have the common characteristic polynomial
+
+[
+\chi(\lambda)
 =
-\{\mathbf R:\; P \text{ is computable to the required accuracy under } \mathbf R\}.
-\]
+\lambda^{10}(\lambda^2-5)(\lambda^2-3)^2
+(\lambda^4-10\lambda^2+13).
+]
 
-The scientific target is not a single arbitrary scalar score. It is the boundary \(\partial\mathfrak F_P\), which describes which resources can substitute for one another and which cannot.
+Thus the graphs are exactly adjacency-cospectral while their component-size and diameter profiles differ.
 
-## First exact bound: dependency reach
+## Exhaustive finite verification
 
-Let \(f:\{0,1\}^n\to\{0,1\}\). Let \(\operatorname{ess}(f)\) be the number of essential input variables.
+For (n=5), the sparse layers (k=|f^{-1}(1)|=4) and (k=5) are exhaustively enumerated.
 
-If:
+| Layer | Raw truth sets | Canonical representatives | Strong separation classes |
+|---|---:|---:|---:|
+| (k=4) | 35,960 | 625 | 0 |
+| (k=5) | 201,376 | 2,674 | 1 |
 
-- each encoded component initially depends on at most \(e\) input variables;
-- every computational primitive combines at most \(q\) previous components;
-- the architecture has depth \(d\);
-- final readout jointly accesses at most \(m\) resulting components;
+The (k=4) result is only a finite negative control for that layer. The (k=5) result identifies the explicit witness above under the repository's stated canonicalization and refinement procedure.
 
-then
+## Infinite family
 
-\[
-\operatorname{ess}(f)\le m e q^d.
-\]
+Let
 
-Therefore any such architecture computing \(f\) exactly must satisfy
+[
+p_r(z)=z_1\oplus\cdots\oplus z_r,
+]
 
-\[
-\boxed{m e q^d\ge \operatorname{ess}(f)}.
-\]
+and define
 
-For parity \(P_n=x_1\oplus\cdots\oplus x_n\),
+[
+F_r(x,z)=f_A(x)\oplus p_r(z),\qquad
+G_r(x,z)=f_B(x)\oplus p_r(z).
+]
 
-\[
-\operatorname{ess}(P_n)=n,
-\]
+Then
 
-so
+[
+G_{F_r}=G_{f_A}\square Q_r,
+\qquad
+G_{G_r}=G_{f_B}\square Q_r.
+]
 
-\[
-\boxed{m e q^d\ge n}.
-\]
+The lift preserves exact cospectrality and equality of the matched Boolean-complexity controls while retaining different component-size and diameter profiles in every essential dimension (N\ge5).
 
-This is a dependency/light-cone lower bound, not claimed as a new foundational theorem.
+For a nonconstant base function (h), writing (H_r=h\oplus p_r),
 
-## Noise-aware requirement
+[
+s(H_r)=s(h)+r,\quad
+bs(H_r)=bs(h)+r,\quad
+D(H_r)=D(h)+r,
+]
 
-For a physical output \(Y\), define for each essential Boolean-cube edge
+and pointwise certificate complexity satisfies
 
-\[
-\Delta_i(x)
-=
-D_{\mathrm{TV}}\!\left(P_{Y|x},P_{Y|x\oplus e_i}\right).
-\]
+[
+C(H_r;(x,z))=C(h;x)+r.
+]
 
-If \(f(x)\ne f(x\oplus e_i)\), then reliable binary decoding with worst-case error at most \(\epsilon<1/2\) requires
+For the displayed witnesses, GF(2) degree remains 5 and real multilinear degree becomes (5+r).
 
-\[
-\Delta_i(x)\ge 1-2\epsilon.
-\]
+## Repository contents
 
-Define
+- `pcf/` — exact sensitivity-graph and Boolean-complexity routines.
+- `scripts/` — exhaustive sparse-layer and deterministic search programs.
+- `tests/` — regression tests for the witness and supporting quantities.
+- `.github/workflows/` — reproducible verification workflow.
+- `SOFTWARE.md` — implementation and verification scope.
+- `CITATION.cff` — citation metadata.
 
-\[
-\Delta_{\min}(f)
-=
-\min_{x,i:\, f(x)\ne f(x\oplus e_i)}
-\Delta_i(x).
-\]
+## Reproducibility
 
-A necessary reliability condition is
+The software constructs sensitivity graphs, computes exact small-instance Boolean complexity measures, performs the sparse-layer searches, evaluates component geometry, and verifies the central witness using exact integer characteristic polynomials. Numerical spectral radius may be used during search refinement, but the reported cospectrality result is established exactly.
 
-\[
-\boxed{\Delta_{\min}(f)\ge 1-2\epsilon}.
-\]
+Python 3.10 or later is required.
 
-This separates **dependency reach** from **surviving physical distinguishability**.
+## Citation
 
-## Precision is not dependency
-
-A device may attempt to compress many logical states into few analog variables. If \(N\) physical variables each support at most \(p\) reliable bits, lossless representation of \(n\) arbitrary bits requires the capacity condition
-
-\[
-Np\ge n.
-\]
-
-However, this does not imply that a one-bit output such as parity requires \(n\) bits of output-channel capacity. Parity is difficult because every input variable is essential, not because the output contains \(n\) bits. The theory therefore keeps **information volume**, **dependency reach**, and **physical distinguishability** separate.
-
-## Computational displacement
-
-A claimed computational advantage is rejected if the missing difficulty is simply displaced into any uncounted stage, including:
-
-- instance encoding;
-- initial-condition preparation;
-- nonlocal or high-order interactions;
-- precision/dynamic range;
-- time or propagation distance;
-- training/adaptation;
-- postselection/success probability;
-- measurement/readout;
-- verification;
-- energy or entropy export;
-- bespoke instance-specific hardware.
-
-See [THEORY.md](THEORY.md) and [NOVELTY_AUDIT.md](NOVELTY_AUDIT.md).
-
-## Current scientific status
-
-The repository now contains an exact Boolean sensitivity-geometry separation theorem. In the complete five-variable layer with five positive inputs, an explicit pair matches a strengthened collection of Boolean complexity controls and has exactly adjacency-cospectral active sensitivity graphs, yet has different active component-size and diameter profiles. A parity-product construction lifts the separation to every essential dimension N >= 5.
-
-The result is a theorem about what these summaries and spectra do not determine. It does not establish a hardware speedup, a new computational model, or a new physical law.
+Akhtar, M. A. K. (2026). _Cospectral Boolean Sensitivity Graphs Can Have Different Global Geometry: An Exact Separation and Infinite Family_ (Version V1). Zenodo. https://doi.org/10.5281/zenodo.23062628
 
 ## License
 
