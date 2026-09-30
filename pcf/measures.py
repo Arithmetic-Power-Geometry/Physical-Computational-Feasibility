@@ -81,3 +81,14 @@ def conventional_profile(n,mask):
         "certificate_complexity":certificate_complexity(n,mask),
         "decision_tree_depth":deterministic_decision_tree_depth(n,mask),
     }
+
+
+def xor_with_parity(n,mask,r):
+    """Truth-table mask of f(x) XOR parity(z), with r fresh high coordinates."""
+    out=0
+    for z in range(1<<r):
+        p=z.bit_count()&1
+        for x in range(1<<n):
+            y=x | (z<<n)
+            if bit(mask,x)^p: out |= 1<<y
+    return out
