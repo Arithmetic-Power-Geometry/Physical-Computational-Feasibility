@@ -70,6 +70,17 @@ def search_layer(n=5,k=4):
             "cheap_collision_classes":sum(1 for v in buckets.values() if len(v)>1),
             "strong_separations":candidate_groups}
 
+def verify_witness_pair(n,a,b):
+    """Return the exact/numerical controlled summaries and residual geometries."""
+    ga,gb=analyze(n,a),analyze(n,b)
+    return {
+        "a":a,"b":b,
+        "strong_key_a":strong_key(n,a),"strong_key_b":strong_key(n,b),
+        "residual_a":residual_key(ga),"residual_b":residual_key(gb),
+        "same_strong_key":strong_key(n,a)==strong_key(n,b),
+        "different_residual":residual_key(ga)!=residual_key(gb),
+    }
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--k",type=int,default=4)
