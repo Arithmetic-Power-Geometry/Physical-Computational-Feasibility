@@ -18,7 +18,7 @@ GitHub Actions first compiles the Python sources, then runs regression tests, th
 
 ## Exact and numerical quantities
 
-Combinatorial quantities are computed exactly for the small instances used here. Spectral radius is presently numerical and is used as a search/refinement control rather than as an unverified exact identity; any candidate whose claim depends on spectral equality requires an independent exact or higher-precision verification step.
+Combinatorial quantities are computed exactly for the small instances used here. Spectral radius is used numerically during search/refinement. For the central n=5 witness, exact adjacency cospectrality is independently verified by equality of the integer characteristic polynomials of the active sensitivity graphs.
 
 ## Scope
 
@@ -26,4 +26,4 @@ The software is an independent research implementation. It does not generate a m
 
 ## Limitations
 
-Full enumeration at n=5 contains 2^32 Boolean functions and is not attempted. The n=5 procedure is a targeted, deterministic, symmetry-reduced sample search; absence of a witness in a finite campaign is not a proof of nonexistence.
+Full enumeration of all 2^32 five-variable Boolean functions is not attempted. The structured sparse-layer search exhaustively enumerates all C(32,4)=35,960 truth sets with four positive inputs and all C(32,5)=201,376 truth sets with five positive inputs; broader n=5 random campaigns remain finite evidence only.
