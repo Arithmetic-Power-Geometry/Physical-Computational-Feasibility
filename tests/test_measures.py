@@ -1,5 +1,5 @@
 import unittest
-from pcf.measures import conventional_profile,real_polynomial_degree
+from pcf.measures import xor_with_parity, conventional_profile,real_polynomial_degree
 
 class MeasureTests(unittest.TestCase):
     def test_real_polynomial_degree(self):
@@ -25,3 +25,11 @@ class MeasureTests(unittest.TestCase):
         })
 
 if __name__=="__main__": unittest.main()
+
+
+class ParityLiftTests(unittest.TestCase):
+    def test_k5_pair_parity_lift_r1_preserves_matched_profile(self):
+        from pcf.measures import conventional_profile
+        a,b=1878982398,65833
+        A=xor_with_parity(5,a,1); B=xor_with_parity(5,b,1)
+        self.assertEqual(conventional_profile(6,A),conventional_profile(6,B))
