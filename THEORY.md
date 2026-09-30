@@ -1359,3 +1359,40 @@ G_{G_r}=\bigsqcup_{j=1}^{2^r}G_g.
 Thus exact adjacency cospectrality is preserved, the original component sizes and diameters are replicated with multiplicity \(2^r\), and the geometric separation persists for every ambient dimension \(5+r\). The conventional Boolean measures in the strengthened summary are unchanged because the added variables are inessential.
 
 This yields an infinite ambient-dimension family, but **not** a growing-essential-dimension separation: both lifted functions still have exactly five essential variables. It is therefore a useful closure corollary rather than the desired asymptotic strengthening.
+
+
+### Parity-product essential-dimension lift
+
+A stronger graph-theoretic lift makes every added coordinate essential. Let \(p_r(z)=z_1\oplus\cdots\oplus z_r\) and define
+
+\[
+F_r(x,z)=f(x)\oplus p_r(z),\qquad
+G_r(x,z)=g(x)\oplus p_r(z).
+\]
+
+For an \(x\)-coordinate, sensitivity is exactly inherited from \(f\) or \(g\). Every \(z\)-coordinate is sensitive at every input. Consequently
+
+\[
+G_{F_r}=G_f\,\square\,Q_r,\qquad
+G_{G_r}=G_g\,\square\,Q_r,
+\]
+
+where \(\square\) denotes Cartesian graph product. Hence all \(5+r\) variables are essential. If \(G_f\) and \(G_g\) are adjacency-cospectral, then their products with the same \(Q_r\) are adjacency-cospectral because the Cartesian-product adjacency spectrum consists of pairwise sums of factor eigenvalues.
+
+Each connected component \(C\) of a base graph produces \(C\square Q_r\). Therefore component sizes are multiplied by \(2^r\), while component diameters increase by \(r\):
+
+\[
+(16,4)\mapsto(16\cdot2^r,4\cdot2^r),\qquad
+(11,9)\mapsto(11\cdot2^r,9\cdot2^r),
+\]
+
+and
+
+\[
+(6,2)\mapsto(6+r,2+r),\qquad
+(4,4)\mapsto(4+r,4+r).
+\]
+
+Thus the exact cospectral geometric separation extends to every essential dimension \(5+r\) at the graph level.
+
+This lift is stated only for properties proved above. Equality of the full strengthened Boolean-complexity summary under the parity product requires separate proofs for block sensitivity, certificates, decision-tree depth, and polynomial degrees before being claimed.
