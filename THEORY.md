@@ -1339,3 +1339,23 @@ where the entries are active-component sizes, matching number, and active-compon
 There exist Boolean functions \(f,g:\{0,1\}^5\to\{0,1\}\) with identical values for all strengthened controls above and exactly cospectral active sensitivity graphs, but with different active-component size and diameter profiles. Therefore any model whose predicted physical resource depends only on those controls cannot, over all five-variable Boolean functions, exactly represent a resource that distinguishes either of these residual geometric properties.
 
 The exhaustive campaign establishes existence and search completeness for the stated \(n=5,k=5\) layer; the theorem itself is witnessed directly by the explicit pair and does not rely on sampling.
+
+
+### Dummy-variable lifting corollary
+
+Let \(f,g:\{0,1\}^5\to\{0,1\}\) be the exact cospectral separation pair above. For any \(r\ge 0\), define
+
+\[
+F_r(x,z)=f(x),\qquad G_r(x,z)=g(x),
+\]
+
+with \(z\in\{0,1\}^r\). No edge in a new \(z\)-coordinate is sensitive, while each fixed \(z\) slice reproduces the original sensitivity graph. Therefore
+
+\[
+G_{F_r}=\bigsqcup_{j=1}^{2^r}G_f,\qquad
+G_{G_r}=\bigsqcup_{j=1}^{2^r}G_g.
+\]
+
+Thus exact adjacency cospectrality is preserved, the original component sizes and diameters are replicated with multiplicity \(2^r\), and the geometric separation persists for every ambient dimension \(5+r\). The conventional Boolean measures in the strengthened summary are unchanged because the added variables are inessential.
+
+This yields an infinite ambient-dimension family, but **not** a growing-essential-dimension separation: both lifted functions still have exactly five essential variables. It is therefore a useful closure corollary rather than the desired asymptotic strengthening.
