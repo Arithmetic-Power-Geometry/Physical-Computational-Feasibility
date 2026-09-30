@@ -1396,3 +1396,25 @@ and
 Thus the exact cospectral geometric separation extends to every essential dimension \(5+r\) at the graph level.
 
 This lift is stated only for properties proved above. Equality of the full strengthened Boolean-complexity summary under the parity product requires separate proofs for block sensitivity, certificates, decision-tree depth, and polynomial degrees before being claimed.
+
+
+### Full strengthened-summary lifting theorem
+
+For a Boolean function \(h\) on variables disjoint from \(z\), let
+\[
+H_r(x,z)=h(x)\oplus p_r(z),\qquad p_r(z)=z_1\oplus\cdots\oplus z_r.
+\]
+The following identities hold for \(r\ge 0\):
+
+- every new parity coordinate is sensitive at every input, so \(s(H_r)=s(h)+r\);
+- the \(r\) singleton parity coordinates form sensitive blocks disjoint from any optimal family of base sensitive blocks, while projecting any disjoint sensitive-block family onto the base/parity coordinates gives the reverse bound, hence \(bs(H_r)=bs(h)+r\);
+- every certificate must fix all \(r\) parity coordinates (otherwise flipping an unfixed parity bit changes the output), and after fixing them it must certify the corresponding base output; hence pointwise certificate size is \(C_h(x)+r\), so \(C(H_r)=C(h)+r\) and the unordered one-sided profile is the base unordered profile shifted by \(r\);
+- a deterministic decision tree must determine parity on all \(r\) fresh bits and determine the base value, giving \(D(H_r)=D(h)+r\);
+- over GF(2), the ANF is the XOR of the base polynomial and the \(r\) degree-one parity variables, so for the nonconstant base witnesses \(\deg_{\mathrm{ANF}}(H_r)=\deg_{\mathrm{ANF}}(h)\) when the base degree exceeds one, rather than adding \(r\);
+- over the reals, parity on \(r\) bits has multilinear degree \(r\), and the XOR identity \(a\oplus b=a+b-2ab\) gives \(\deg_{\mathbb R}(H_r)=\deg_{\mathbb R}(h)+r\) for nonconstant \(h\).
+
+At the sensitivity-graph level, \(G_{H_r}=G_h\square Q_r\). Therefore, applying the construction to the exact pair \(f,g\) preserves equality of all matched strengthened controls after the appropriate common shifts, preserves exact adjacency cospectrality, and preserves a component-size and diameter separation in every essential dimension \(5+r\).
+
+**Infinite-family separation theorem.** For every \(N\ge5\), there exist Boolean functions \(F_N,G_N:\{0,1\}^N\to\{0,1\}\) whose strengthened Boolean-complexity summaries match (with the same labeled/sorted directional profile up to the common parity-coordinate additions) and whose sensitivity graphs are exactly adjacency-cospectral, yet whose active component-size distributions and diameter profiles differ. The family is obtained from the explicit five-variable witness by XOR with parity on \(N-5\) fresh variables.
+
+The GF(2) degree point is important: XOR with fresh parity variables does **not** add degrees; the base degree 5 remains 5 for this witness family. This differs from the real multilinear degree, which increases by \(r\).
