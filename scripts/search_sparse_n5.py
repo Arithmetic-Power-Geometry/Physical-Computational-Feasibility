@@ -5,10 +5,30 @@ corresponding dense layers. Expensive controls are evaluated only after cheap
 summary collisions with differing residual geometry are found.
 """
 import argparse
-from itertools import combinations
+from itertools import combinations, permutations
 from collections import defaultdict
-from scripts.search_n5 import canonical_symmetry, cheap_key, residual_key, refinement_keys, strong_key
+from scripts.search_n5 import cheap_key, residual_key, refinement_keys, strong_key
 from pcf.boolean_geometry import analyze
+
+def _permute_vertex(n,x,p):
+    y=0
+    for old in range(n):
+        if x&(1<<old): y|=1<<p[old]
+    return y
+
+def canonical_sparse_vertices(n,vertices):
+    """Canonical mask under input-variable permutations for a sparse truth set.
+
+    For the sparse layers used here (k < 2^(n-1)), output complementation
+    cannot produce another mask in the same sparse layer, so only coordinate
+    permutations need be considered.
+    """
+    best=None
+    for p in permutations(range(n)):
+        m=0
+        for x in vertices: m |= 1<<_permute_vertex(n,x,p)
+        if best is None or m<best: best=m
+    return best
 
 def mask_from_vertices(vertices):
     m=0
@@ -20,7 +40,7 @@ def search_layer(n=5,k=4):
     buckets=defaultdict(list); seen=set(); raw=0
     for ones in combinations(range(1<<n),k):
         raw+=1
-        m=canonical_symmetry(n,mask_from_vertices(ones))
+        m=canonical_sparse_vertices(n,ones)
         if m in seen: continue
         seen.add(m)
         buckets[cheap_key(n,m)].append(m)
