@@ -100,3 +100,39 @@ The direct embedding route was stress-tested.
 Therefore "physical embedding cost of the sensitivity graph" is not sufficient as the project's novelty.
 
 The surviving novelty claim must be a **coupled feasibility law** rather than a single graph parameter.
+
+
+## September 2026 theorem-stage update
+
+The earlier "pre-breakthrough" status above records the development history. The project now has a stronger theorem-stage result, but novelty language remains limited to the verified separation itself.
+
+### Established ingredients (not claimed as new)
+
+- Boolean sensitivity, block sensitivity, certificate complexity, polynomial degree, and deterministic decision-tree complexity.
+- Sensitivity graphs / bichromatic edges of the Boolean hypercube and spectral methods in sensitivity theory.
+- Graph cospectrality as a standard spectral-graph concept.
+- Cartesian graph products and the pairwise-sum rule for adjacency spectra.
+- XOR with parity and standard composition reasoning for Boolean functions.
+
+### New-to-project theorem claim
+
+An exhaustive search of the complete five-variable truth-set layer with five positive inputs found an explicit pair whose strengthened Boolean-complexity controls match and whose active sensitivity graphs are exactly adjacency-cospectral, while their active component-size distributions and diameter profiles differ. The explicit witness is independently regression-tested using an exact integer characteristic polynomial, not only a rounded spectral radius.
+
+The parity-product construction lifts this pair to every essential dimension N >= 5. The lift preserves equality of the matched strengthened controls under their common transformations and preserves exact adjacency cospectrality, while the component-size and diameter separation persists.
+
+### What the theorem does not establish
+
+The theorem does not by itself prove a physical speedup, a new computational model, a new law of physics, or a lower bound on a concrete hardware architecture. Any physical-computational interpretation must therefore be stated as a consequence for summary-mediated models or as motivation, not as an experimentally established physical advantage.
+
+### Current publication assessment
+
+| Result | Assessment |
+|---|---|
+| Exact n=5 strengthened-summary/cospectral geometry separation | central finite theorem |
+| Complete k=5 layer enumeration (201,376 truth sets) | exhaustive discovery/completeness evidence for that layer |
+| Exact characteristic-polynomial equality of witness graphs | strengthens spectral control from radius to full adjacency spectrum |
+| Parity-product lift to every essential dimension N >= 5 | central infinite-family theorem |
+| Summary-mediated blindness corollary | elementary consequence; useful interpretation, not standalone novelty |
+| Physical feasibility advantage | not established |
+
+A publication claim should center on what standard Boolean-complexity summaries and adjacency spectra fail to determine about sensitivity-graph geometry, rather than claiming novelty for sensitivity graphs, spectra, Cartesian products, or parity composition themselves.
