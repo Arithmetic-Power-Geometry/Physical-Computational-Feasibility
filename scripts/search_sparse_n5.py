@@ -7,7 +7,7 @@ summary collisions with differing residual geometry are found.
 import argparse
 from itertools import combinations, permutations
 from collections import defaultdict
-from scripts.search_n5 import cheap_key, residual_key, refinement_keys, strong_key
+from scripts.search_n5 import canonical_symmetry, cheap_key, residual_key, refinement_keys, strong_key
 from pcf.boolean_geometry import analyze
 
 def _permute_vertex(n,x,p):
@@ -40,7 +40,7 @@ def search_layer(n=5,k=4):
     buckets=defaultdict(list); seen=set(); raw=0
     for ones in combinations(range(1<<n),k):
         raw+=1
-        m=canonical_sparse_vertices(n,ones)
+        m=canonical_symmetry(n,mask_from_vertices(ones))
         if m in seen: continue
         seen.add(m)
         buckets[cheap_key(n,m)].append(m)
