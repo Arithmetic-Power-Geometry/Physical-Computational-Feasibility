@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this research software or its results, please cite the associated repository."
+title: "Physical Computational Feasibility"
+type: software
+authors:
+  - family-names: Akhtar
+    given-names: Mohammad Amir Khusru
+year: 2026
+repository-code: "https://github.com/Arithmetic-Power-Geometry/Physical-Computational-Feasibility"
+license: Apache-2.0
