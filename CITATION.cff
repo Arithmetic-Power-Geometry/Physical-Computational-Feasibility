@@ -1,10 +1,23 @@
 cff-version: 1.2.0
-message: "If you use this research software or its results, please cite the associated repository."
-title: "Physical Computational Feasibility"
+message: "If you use this software or its results, please cite the associated research work."
+title: "Cospectral Boolean Sensitivity Graphs Can Have Different Global Geometry: An Exact Separation and Infinite Family"
 type: software
+version: "V1"
 authors:
-  - family-names: Akhtar
-    given-names: Mohammad Amir Khusru
-year: 2026
+  - family-names: "Akhtar"
+    given-names: "Mohammad Amir Khusru"
+    affiliation: "Usha Martin University"
 repository-code: "https://github.com/Arithmetic-Power-Geometry/Physical-Computational-Feasibility"
-license: Apache-2.0
+url: "https://doi.org/10.5281/zenodo.23062628"
+doi: "10.5281/zenodo.23062628"
+license: "Apache-2.0"
+date-released: "2026"
+preferred-citation:
+  type: article
+  title: "Cospectral Boolean Sensitivity Graphs Can Have Different Global Geometry: An Exact Separation and Infinite Family"
+  authors:
+    - family-names: "Akhtar"
+      given-names: "Mohammad Amir Khusru"
+  year: 2026
+  doi: "10.5281/zenodo.23062628"
+  url: "https://doi.org/10.5281/zenodo.23062628"
