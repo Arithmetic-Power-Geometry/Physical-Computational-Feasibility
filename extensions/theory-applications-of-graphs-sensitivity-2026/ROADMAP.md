@@ -47,3 +47,6 @@ Infinite parity lift proved with exact Kronecker-sum spectrum and nonisomorphic 
 
 ## P08 completed: hostile referee audit and exact-search replacement (2026-11-07)
 Blocking source errors identified and a drop-in exact-search LaTeX replacement committed: fixed-weight canonicalization must use S5 only; k4 cheap buckets 24 not 31 under the explicit key; exact Gram spectra must replace unbounded numerical spectral-radius pruning. P07 rerun passed; P06 negative control checked. P09 must integrate patch, compile updated manuscript, and finish independent prior-art/BibTeX audit before submission.
+
+## P09 local manuscript integration (2026-11-07)
+A revised TAG_main.tex and clean 19-page PDF were created and packaged locally, integrating P02–P08 mathematics and exact search corrections. P09 build script and provenance report are committed; **full revised TeX, PDF and figures are NOT individually committed**. User must upload the provided P09 ZIP or authorize a supported transfer workflow before GitHub source sync can be claimed. Remaining gates: bibliographic metadata audit, visual check of all figures/tables, coauthor consent and final submission readiness.
