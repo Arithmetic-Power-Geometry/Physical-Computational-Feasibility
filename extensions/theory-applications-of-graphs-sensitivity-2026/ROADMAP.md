@@ -44,3 +44,6 @@ Proved and computationally tested Boolean cube common-neighbour Gram criterion; 
 
 ## P07 theorem complete, novelty pending (2026-11-07)
 Infinite parity lift proved with exact Kronecker-sum spectrum and nonisomorphic component profiles for all r>=0; Boolean measures checked, including correction that GF2 degree stays 5 and C0=C1=5+r for r>=1. Locally executed exact r<=2 geometry and r<=1 complexity tests; committed reproducible code, CSV, checksum record, theorem proof and references. No GitHub CI execution claimed. Next: hostile proof audit and full prior-art novelty check before manuscript rewrite.
+
+## P08 completed: hostile referee audit and exact-search replacement (2026-11-07)
+Blocking source errors identified and a drop-in exact-search LaTeX replacement committed: fixed-weight canonicalization must use S5 only; k4 cheap buckets 24 not 31 under the explicit key; exact Gram spectra must replace unbounded numerical spectral-radius pruning. P07 rerun passed; P06 negative control checked. P09 must integrate patch, compile updated manuscript, and finish independent prior-art/BibTeX audit before submission.
