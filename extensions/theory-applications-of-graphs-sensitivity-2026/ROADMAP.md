@@ -32,3 +32,6 @@ P01 archive transfer VERIFIED: GitHub file `TAG_P01_Complete_Source_and_Build (1
 
 ## P03 audit status, 2026-11-07
 Exact full k4 and k5 S5 permutation-orbit enumeration independently reproduced (625, 2674). k5 cheap-bucket count 63 reproduced under explicitly defined exact key; k4 produces 24, not manuscript's 31, under that key. Strong separation count and minimality remain open; P03 is partial, not a full proof of uniqueness or minimum dimension. See `evidence/P03_EXHAUSTIVE_ORBIT_AUDIT.md`.
+
+## P04 exact refinement milestone (2026-11-07)
+All 3299 S5 representatives have been refined by exact integer Gram characteristic polynomials and geometry. Unique k5 geometry-discordant joint class contains 36 representatives, split 18/18 and sharing all strengthened Boolean complexity controls; no k4 discordance. k4 cheap bucket count is 24 under the explicit key, not the manuscript's 31. P04 scope is restricted to n=5,k=4/5 and S5 canonicalization; global minimality and literature novelty remain unproved. Code and report committed.
