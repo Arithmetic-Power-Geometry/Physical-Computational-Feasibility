@@ -26,3 +26,6 @@ Progress: P00 new extension setup on 2026-11-07; P01 PARTIALLY EXECUTED (local T
 
 ## 2026-11-07 execution update
 P01 remains PARTIAL: local TAG PDF builds, but original binary ZIP/figures/full source are not yet in GitHub. P02 is PARTIAL: exact independent witness computation completed locally and an executable verifier and evidence report committed in `code/p02_verify_witness.py` and `evidence/P02_WITNESS_VERIFICATION.md`. Full enumeration and a separately implemented second checker remain outstanding. No completed-stage claim is made.
+
+## 2026-11-07 archive upload and P02 update
+P01 archive transfer VERIFIED: GitHub file `TAG_P01_Complete_Source_and_Build (1).zip`, blob `55db83326c4c885dc5ccf0952f0686ddfa86ffd8`, 34 ZIP entries, checksum validated. The full source exists in GitHub inside the ZIP, not yet unpacked as individual repository files. P02 witness cospectrality and geometry independently cross-checked in Python and JavaScript. P02 exhaustive enumeration, minimality and prior-art novelty still pending.
