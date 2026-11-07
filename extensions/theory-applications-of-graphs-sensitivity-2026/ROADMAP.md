@@ -22,4 +22,4 @@ Final formatting: https://digitalcommons.georgiasouthern.edu/tag/styleguide.html
 
 TAG initial submission uses PDF; later final-form formatting specifies US-letter 8.5x11, 1-inch margins, single column, 12-point Times/comparable font, single spaced, no printed author names/title, page numbers, headers or footers. Its manuscript policy is single-blind by default with opt-in double-blind review. Separate submission metadata is required.
 
-Progress: P00 new extension setup on 2026-11-07; P01-P12 NOT YET EXECUTED.
+Progress: P00 new extension setup on 2026-11-07; P01 PARTIALLY EXECUTED (local TAG build passed; complete GitHub source/figures/PDF transfer blocked). P02-P12 NOT STARTED.
