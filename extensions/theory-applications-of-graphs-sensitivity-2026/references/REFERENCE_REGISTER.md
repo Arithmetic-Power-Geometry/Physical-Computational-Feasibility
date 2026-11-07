@@ -41,3 +41,6 @@ Jain, Klauck, Santha, "Optimal direct sum results for deterministic and randomiz
 
 ## P08 referee audit — bibliography not yet cleared
 The P08 step did not independently revalidate all cited DOIs or bibliographic metadata. Godsil–McKay prior art is relevant; non-equivalence of the particular Boolean witnesses to a switching construction remains unproved. Do not state that exhaustive novelty checking is complete. The corrected search counts are computational outputs, not externally sourced citations.
+
+## P09 reference integration status
+Original references.bib was retained without undocumented bibliographic edits and compiled with Biber in the 19-page revised TAG PDF. Compilation alone does not validate DOI, authorship, dates or novelty; comprehensive primary-source metadata verification remains pending. Local references.bib SHA256 edcca8bab922e86e32a32802b88a93ffc4cf5d5acd22eed70ceb7252ff28836b.
