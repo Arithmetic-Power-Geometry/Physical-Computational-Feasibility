@@ -17,3 +17,6 @@ Reference status: registered, not comprehensive. P06/P08 must verify all citatio
 
 ## P01 bibliography status
 Original `references.bib` preserved in the downloadable source package; Biber compilation completed without undefined-citation warnings. This checks syntactic bibliography resolution only, **not** bibliographic truth, DOI validity, relevance or novelty. P06 and P08 remain required. No new mathematical citation was represented as independently verified during P01.
+
+## P02 source/reference status
+The exact witness calculations depend on user-supplied truth sets and standard finite definitions, not on new literature assertions. No additional DOI or BibTeX record is represented as verified by this P02 run. Prior-art assessment is still P06/P08.
