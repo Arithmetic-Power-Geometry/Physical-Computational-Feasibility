@@ -38,3 +38,6 @@ Godsil & McKay, *Constructing cospectral graphs*, Aequationes Mathematicae 25 (1
 
 ## P07 literature verified (2026-11-07)
 Jain, Klauck, Santha, "Optimal direct sum results for deterministic and randomized decision tree complexity", Information Processing Letters 110 (2010), 893–897, DOI 10.1016/j.ipl.2010.07.020. Zhang, Shi, "On the parity complexity measures of Boolean functions", Theoretical Computer Science 411 (2010), 2612–2618, DOI 10.1016/j.tcs.2010.03.027. Tal, "Properties and Applications of Boolean Function Composition", ECCC TR12-163 (2012), https://eccc.weizmann.ac.il/report/2012/163/. Distinguish ordinary decision-tree complexity from parity decision-tree complexity. No priority claim for the Cartesian-product or parity degree identities.
+
+## P08 referee audit — bibliography not yet cleared
+The P08 step did not independently revalidate all cited DOIs or bibliographic metadata. Godsil–McKay prior art is relevant; non-equivalence of the particular Boolean witnesses to a switching construction remains unproved. Do not state that exhaustive novelty checking is complete. The corrected search counts are computational outputs, not externally sourced citations.
