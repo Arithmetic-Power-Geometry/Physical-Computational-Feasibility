@@ -1,0 +1,58 @@
+\documentclass[twoside, 12pt]{article}
+\usepackage{amssymb, amsmath, mathrsfs, amsthm}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{float, caption, subcaption}
+\pagestyle{empty}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}{Claim}[section]
+\newtheorem{fact}{Fact}[section]
+\newtheorem{problem}{Problem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{question}{Question}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+\begin{document}
+\title{\bf Title of paper}
+\author{First Author\footnote{First author affiliation, affiliation address  {\tt firstauthor@university.edu}}, Second Author\footnote{Second author affiliation, affiliation address {\tt secondauthor@university.edu}}}
+%\maketitle
+
+\begin{abstract}
+Abstract of paper.
+\end{abstract}
+
+\thispagestyle{empty}
+
+\section{Introduction}
+
+Body of paper.  Reference published papers like this \cite{CITE1}.
+
+\begin{theorem}\label{Label1}
+Statement of theorem.
+\end{theorem}
+
+\begin{proof}
+Proof of Theorem~\ref{Label1}.
+\end{proof}
+
+\begin{corollary}
+Statement of corollary.
+\end{corollary}
+
+
+
+\begin{thebibliography}{1}
+
+\bibitem{CITE1}
+First Author, Second Author, and Third Author.
+\newblock Title of cited paper.
+\newblock {\em Abbrev. Journal Name.}, Volume(Issue):Page--Page, Year.
+
+\end{thebibliography}
+
+\end{document}
