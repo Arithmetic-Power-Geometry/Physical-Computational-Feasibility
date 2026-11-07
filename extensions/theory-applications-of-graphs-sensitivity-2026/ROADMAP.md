@@ -23,3 +23,6 @@ Final formatting: https://digitalcommons.georgiasouthern.edu/tag/styleguide.html
 TAG initial submission uses PDF; later final-form formatting specifies US-letter 8.5x11, 1-inch margins, single column, 12-point Times/comparable font, single spaced, no printed author names/title, page numbers, headers or footers. Its manuscript policy is single-blind by default with opt-in double-blind review. Separate submission metadata is required.
 
 Progress: P00 new extension setup on 2026-11-07; P01 PARTIALLY EXECUTED (local TAG build passed; complete GitHub source/figures/PDF transfer blocked). P02-P12 NOT STARTED.
+
+## 2026-11-07 execution update
+P01 remains PARTIAL: local TAG PDF builds, but original binary ZIP/figures/full source are not yet in GitHub. P02 is PARTIAL: exact independent witness computation completed locally and an executable verifier and evidence report committed in `code/p02_verify_witness.py` and `evidence/P02_WITNESS_VERIFICATION.md`. Full enumeration and a separately implemented second checker remain outstanding. No completed-stage claim is made.
