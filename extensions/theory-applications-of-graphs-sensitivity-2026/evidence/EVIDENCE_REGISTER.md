@@ -14,3 +14,6 @@
 | E10 | Mohammad Amir Khusru Akhtar as corresponding author | Recorded in metadata | Confirm reflected in source/portal and consent |
 
 A claimed theorem is NOT considered independently verified merely because the uploaded manuscript states it. Preserve failures and contradictions and modify results accordingly.
+
+## P01 verified local build, 2026-11-07
+TAG_main.pdf compiled with pdflatex/Biber: 18 US-letter pages, 12pt, 1in margins; no printed title, author names or page numbers. Original 30 files extracted locally and preserved. Original ZIP, source, figures and PDF **not yet in GitHub**. Evidence report: `evidence/P01_EXECUTION_REPORT.md`. P01 remains PARTIAL. This build does not verify the paper's mathematical claims.
