@@ -41,3 +41,6 @@ Independent C++17 and Python/SymPy full n<=4 audits agree: 2,4,14,222 NPN orbits
 
 ## P06 structural criterion and novelty boundary (2026-11-07)
 Proved and computationally tested Boolean cube common-neighbour Gram criterion; all 256 Q3 functions checked, A/B exact 5×5 Gram polynomials certified, negative control tested. Prior art Godsil–McKay 1982 and later switching methods reviewed at source level. Novelty of the matrix identity rejected as classical; potential novelty restricted to Boolean sensitivity counterexample and rigorously scoped finite minimality. GM-switching non-equivalence not established. P06 source, proof and reference register committed.
+
+## P07 theorem complete, novelty pending (2026-11-07)
+Infinite parity lift proved with exact Kronecker-sum spectrum and nonisomorphic component profiles for all r>=0; Boolean measures checked, including correction that GF2 degree stays 5 and C0=C1=5+r for r>=1. Locally executed exact r<=2 geometry and r<=1 complexity tests; committed reproducible code, CSV, checksum record, theorem proof and references. No GitHub CI execution claimed. Next: hostile proof audit and full prior-art novelty check before manuscript rewrite.
