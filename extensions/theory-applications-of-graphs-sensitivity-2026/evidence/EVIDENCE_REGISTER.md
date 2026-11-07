@@ -17,3 +17,6 @@ A claimed theorem is NOT considered independently verified merely because the up
 
 ## P01 verified local build, 2026-11-07
 TAG_main.pdf compiled with pdflatex/Biber: 18 US-letter pages, 12pt, 1in margins; no printed title, author names or page numbers. Original 30 files extracted locally and preserved. Original ZIP, source, figures and PDF **not yet in GitHub**. Evidence report: `evidence/P01_EXECUTION_REPORT.md`. P01 remains PARTIAL. This build does not verify the paper's mathematical claims.
+
+## P02 witness check
+E01–E03 locally independently verified for explicit A/B via exact graph construction, BFS, Gram polynomial, certificate and query complexity DPs; see `evidence/P02_WITNESS_VERIFICATION.md` and `code/p02_verify_witness.py`. The one-sided certificate maxima are (C0,C1)=(3,5); individual positive-input certificate values are (4,4,4,5,5). E04–E06 remain unverified. P01 source transfer still open. P02 second independent checker still open.
