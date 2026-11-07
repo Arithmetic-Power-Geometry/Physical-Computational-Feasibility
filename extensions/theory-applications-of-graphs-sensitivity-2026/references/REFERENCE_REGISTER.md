@@ -23,3 +23,6 @@ The exact witness calculations depend on user-supplied truth sets and standard f
 
 ## 2026-11-07 verification boundary
 The uploaded GitHub archive contains the original bibliography and TAG source, verified by exact Git blob identity with the locally inspected archive. No claim is made that individual bibliography entries/DOIs have been externally audited. The second exact JavaScript verifier uses no new literature citations.
+
+## P03 source of counts
+Raw and canonical counts are from new exhaustive finite computations, not literature. The manuscript's citation to general canonical graph methods does not define or validate its specific output-complement fixed-weight quotient. No new external bibliographic record has been verified in this stage.
