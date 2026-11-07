@@ -14,3 +14,6 @@ Primary mathematical verification leads; each needs full author, journal, year, 
 - Hammack, Imrich and Klavžar, Handbook of Product Graphs (2011), doi:10.1201/b10959.
 
 Reference status: registered, not comprehensive. P06/P08 must verify all citation keys, bibliographic metadata, relevance and theorem-level distinction. Never invent journal volumes/pages, DOIs, or novelty conclusions.
+
+## P01 bibliography status
+Original `references.bib` preserved in the downloadable source package; Biber compilation completed without undefined-citation warnings. This checks syntactic bibliography resolution only, **not** bibliographic truth, DOI validity, relevance or novelty. P06 and P08 remain required. No new mathematical citation was represented as independently verified during P01.
