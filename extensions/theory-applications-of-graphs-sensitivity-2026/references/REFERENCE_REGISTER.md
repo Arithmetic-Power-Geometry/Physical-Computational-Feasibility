@@ -26,3 +26,6 @@ The uploaded GitHub archive contains the original bibliography and TAG source, v
 
 ## P03 source of counts
 Raw and canonical counts are from new exhaustive finite computations, not literature. The manuscript's citation to general canonical graph methods does not define or validate its specific output-complement fixed-weight quotient. No new external bibliographic record has been verified in this stage.
+
+## P04 evidence provenance
+P04 results are exhaustive exact computations, not externally sourced theorems. Standard Faddeev–LeVerrier identity, BFS, finite minimax, and Möbius transforms are explicitly implemented. No new bibliography entry or DOI was independently checked. Full prior-art novelty audit remains pending.
