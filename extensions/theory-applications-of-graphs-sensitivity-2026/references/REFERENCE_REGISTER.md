@@ -29,3 +29,6 @@ Raw and canonical counts are from new exhaustive finite computations, not litera
 
 ## P04 evidence provenance
 P04 results are exhaustive exact computations, not externally sourced theorems. Standard Faddeev–LeVerrier identity, BFS, finite minimax, and Möbius transforms are explicitly implemented. No new bibliography entry or DOI was independently checked. Full prior-art novelty audit remains pending.
+
+## P05 reference status
+The minimum-dimension claim is supported by the newly executed exhaustive n<=4 algorithms and archived code, not by an external cited classification. No new DOI or bibliographic metadata was checked; external prior-art novelty remains pending. NPN here means input permutations, input negations and output negation; output negation exchanges C0 and C1, so the sorted pair is compared.
