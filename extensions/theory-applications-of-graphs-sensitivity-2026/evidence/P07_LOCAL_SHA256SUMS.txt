@@ -1,0 +1,5 @@
+# P07 local executed artifacts SHA-256 (2026-11-07)
+002f80425f10209e5e6680ba31b20dad962e0458c54f3a3ac476faa5feedfb3f  verify_p07.py
+d748fa89a42a6477d4b373de9564f4060cce9b98c9fe54ab8527bd15b57d435a  results.json
+
+These checksums identify the locally executed source and its JSON output, NOT the separate GitHub source blob or the committed CSV. The GitHub code/p07_parity_lift_verify.py is a faithful independently committed reproduction and has not been executed through GitHub CI.
