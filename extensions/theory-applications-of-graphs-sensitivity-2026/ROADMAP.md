@@ -29,3 +29,6 @@ P01 remains PARTIAL: local TAG PDF builds, but original binary ZIP/figures/full 
 
 ## 2026-11-07 archive upload and P02 update
 P01 archive transfer VERIFIED: GitHub file `TAG_P01_Complete_Source_and_Build (1).zip`, blob `55db83326c4c885dc5ccf0952f0686ddfa86ffd8`, 34 ZIP entries, checksum validated. The full source exists in GitHub inside the ZIP, not yet unpacked as individual repository files. P02 witness cospectrality and geometry independently cross-checked in Python and JavaScript. P02 exhaustive enumeration, minimality and prior-art novelty still pending.
+
+## P03 audit status, 2026-11-07
+Exact full k4 and k5 S5 permutation-orbit enumeration independently reproduced (625, 2674). k5 cheap-bucket count 63 reproduced under explicitly defined exact key; k4 produces 24, not manuscript's 31, under that key. Strong separation count and minimality remain open; P03 is partial, not a full proof of uniqueness or minimum dimension. See `evidence/P03_EXHAUSTIVE_ORBIT_AUDIT.md`.
