@@ -1,0 +1,73 @@
+% P08 replacement for TAG_main.tex, exact-search section.
+% Replace the paragraph immediately preceding Algorithm "Structured exhaustive search"
+% and the complete algorithm and table. Counts have precise definitions.
+
+The exhaustive search uses only permutations of the five input coordinates
+to identify canonical representatives within each fixed-weight layer.
+This action is the group $S_5$, not the full automorphism group of $Q_5$.
+Output complementation sends weight $k$ to $32-k$ and therefore does
+not act internally on the layers $k=4$ and $k=5$.
+For each canonical representative we compute the exact inexpensive
+signature consisting of sensitive-edge count, maximum sensitivity,
+the complete sensitivity-degree histogram, sorted directional
+sensitive-edge counts, and essential-variable count.
+We then compute the exact integer characteristic polynomial of the
+positive-to-negative incidence Gram matrix and the multiset of
+nontrivial component sizes and diameters. The Gram polynomial
+determines the full adjacency spectrum at fixed dimension and
+truth-set weight. No floating-point eigenvalue test is used to
+exclude a candidate. For classes with distinct component geometry,
+we independently refine by block sensitivity, deterministic
+decision-tree depth, the unordered pair of one-sided certificate
+maxima, GF(2) degree, and real multilinear degree.
+
+\begin{algorithm}[H]
+\caption{Exact exhaustive search for sensitivity-graph geometry separation}
+\label{alg:search}
+\begin{algorithmic}[1]
+\Require Dimension $n=5$, truth-set weight $k\in\{4,5\}$
+\State Initialize an empty set of permutation-canonical masks
+\For{each $k$-subset $S\subseteq\{0,1\}^5$}
+  \State compute $\min_{\pi\in S_5}\pi(S)$ and retain each distinct canonical mask once
+\EndFor
+\For{each canonical mask $S$}
+  \State construct its exact sensitivity graph and component geometry
+  \State compute its exact cheap signature and Gram characteristic polynomial
+  \State insert $S$ into the joint (cheap signature, polynomial) bucket
+\EndFor
+\For{each joint bucket containing distinct component geometries}
+  \State compute exact block sensitivity, decision-tree depth,
+  \Statex \hspace{\algorithmicindent} one-sided certificate maxima and both polynomial degrees
+  \State retain only sub-buckets with matching strengthened controls
+  \Statex \hspace{\algorithmicindent} but distinct component geometries
+\EndFor
+\State \Return surviving classes and exact witness certificates
+\end{algorithmic}
+\end{algorithm}
+
+\begin{table}[H]
+\centering
+\caption{Exact $n=5$ fixed-weight enumeration. All canonical counts use
+input-coordinate permutations $S_5$. A joint class is indexed by the
+specified cheap signature and the exact Gram characteristic polynomial.
+A geometry-discordant joint class contains distinct component profiles;
+a strong class survives all additional Boolean-complexity controls.}
+\label{tab:searchcounts}
+\begin{tabular}{lrrrrrr}
+\toprule
+$k$ & Raw & $S_5$ orbits & Cheap & Spectral & Joint & Strong\\
+\midrule
+4 & 35,960 & 625 & 24 & 27 & 29 & 0\\
+5 & 201,376 & 2,674 & 63 & 86 & 92 & 1\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The unique geometry-discordant joint class in the $k=5$ layer
+contains 36 $S_5$-canonical representatives, with 18 having
+nontrivial component sizes $(16,4)$ and 18 having $(11,9)$.
+All 36 share the strengthened Boolean complexity signature
+$(bs,D,C_0,C_1,\deg_{\mathbb F_2},\deg_{\mathbb R})
+=(5,5,3,5,5,5)$. The number one in the table refers to one
+surviving joint class under this explicit protocol, not to
+global uniqueness among all five-variable functions.
