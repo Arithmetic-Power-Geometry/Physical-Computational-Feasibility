@@ -20,3 +20,6 @@ Original `references.bib` preserved in the downloadable source package; Biber co
 
 ## P02 source/reference status
 The exact witness calculations depend on user-supplied truth sets and standard finite definitions, not on new literature assertions. No additional DOI or BibTeX record is represented as verified by this P02 run. Prior-art assessment is still P06/P08.
+
+## 2026-11-07 verification boundary
+The uploaded GitHub archive contains the original bibliography and TAG source, verified by exact Git blob identity with the locally inspected archive. No claim is made that individual bibliography entries/DOIs have been externally audited. The second exact JavaScript verifier uses no new literature citations.
