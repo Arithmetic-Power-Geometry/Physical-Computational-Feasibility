@@ -32,3 +32,6 @@ P04 results are exhaustive exact computations, not externally sourced theorems. 
 
 ## P05 reference status
 The minimum-dimension claim is supported by the newly executed exhaustive n<=4 algorithms and archived code, not by an external cited classification. No new DOI or bibliographic metadata was checked; external prior-art novelty remains pending. NPN here means input permutations, input negations and output negation; output negation exchanges C0 and C1, so the sorted pair is compared.
+
+## P06 checked prior-art sources (2026-11-07)
+Godsil & McKay, *Constructing cospectral graphs*, Aequationes Mathematicae 25 (1982), 257–268, author-hosted primary PDF https://users.cecs.anu.edu.au/~bdm/papers/GodsilMcKayCospectral.pdf. 2020 switching generalization https://doi.org/10.1016/j.laa.2020.05.025; 2026 switching generalization https://doi.org/10.1016/j.laa.2026.08.030. These show that general cospectral constructions and orthogonal-switching mechanisms predate this manuscript. Full BibTeX metadata and direct classification of A/B under switching remain unverified. Do not claim the Boolean Gram identity as a novel general theorem.
