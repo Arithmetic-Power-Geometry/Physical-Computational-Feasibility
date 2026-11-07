@@ -38,3 +38,6 @@ All 3299 S5 representatives have been refined by exact integer Gram characterist
 
 ## P05 completed local minimum-dimension verification (2026-11-07)
 Independent C++17 and Python/SymPy full n<=4 audits agree: 2,4,14,222 NPN orbits; no spectrum+strengthened-complexity matched pair with different active component geometry. Five is minimal **for this precisely defined phenomenon** when combined with the established n5 witness. Python source and CSV results committed; C++ local evidence archive available but C++ source not yet separately committed. See `evidence/P05_MINIMUM_DIMENSION_AUDIT.md`.
+
+## P06 structural criterion and novelty boundary (2026-11-07)
+Proved and computationally tested Boolean cube common-neighbour Gram criterion; all 256 Q3 functions checked, A/B exact 5×5 Gram polynomials certified, negative control tested. Prior art Godsil–McKay 1982 and later switching methods reviewed at source level. Novelty of the matrix identity rejected as classical; potential novelty restricted to Boolean sensitivity counterexample and rigorously scoped finite minimality. GM-switching non-equivalence not established. P06 source, proof and reference register committed.
